@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="bookDetails"
+            type="com.ssb.apps.bookapp.model.DashboardResModel.BookData" />
+        <variable
+            name="imageUrl"
+            type="String" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/dp120"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/itemImage"
+                android:layout_width="@dimen/dp100"
+                android:layout_height="@dimen/dp110"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
+                android:src="@drawable/coverpaeg" />
+
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{bookDetails.bookName}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/t16sp"
+
+                app:fontFamily="@font/roboto_regular" />
+
+            <TextView
+                android:id="@+id/tvAuthName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="@{bookDetails.autherName}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/t14sp"
+                app:fontFamily="@font/roboto_regular" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

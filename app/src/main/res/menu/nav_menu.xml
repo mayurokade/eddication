@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="nav_view">
+
+
+
+    <item
+        android:id="@+id/menu_dashboard"
+
+        android:title="@string/menu_dashboard"/>
+    <!--android:icon="@drawable/ic_dashboard"-->
+    <item
+        android:id="@+id/menu_calendar"
+
+        android:title="@string/menu_profile" />
+
+    <item
+        android:id="@+id/menu_helpus"
+
+        android:iconTint="@color/colorPrimary"
+        android:title="@string/menu_helpus" />
+    <item
+        android:id="@+id/menu_aboutus"
+
+        android:iconTint="@color/colorPrimary"
+        android:title="@string/menu_aboutus" />
+<!--android:icon="@drawable/settings"-->
+    <item
+        android:id="@+id/menu_ic_logout"
+
+        android:iconTint="@color/colorPrimary"
+        android:title="@string/str_logout" />
+<!--android:icon="@drawable/ic_logout"-->
+</menu>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/dp30">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp10"
+                android:text="@string/verify_your_account"
+                android:textColor="@color/black"
+                android:textSize="27sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_regular" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp10"
+                android:background="@drawable/rounded_corner_white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp10">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:src="@drawable/ic_phone" />
+                </LinearLayout>
+
+
+                <EditText
+                    android:id="@+id/etNum"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:hint="@string/login_with_number"
+                    android:textColor="@color/black"
+                    android:background="@null"
+                    android:textSize="@dimen/t16sp"
+                    app:fontFamily="@font/roboto_regular" />
+                <TextView
+                    android:id="@+id/tvWroning"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:text="@string/enter_register_number"
+                    android:maxLength="10"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/sp14"
+                    app:fontFamily="@font/roboto_regular" />
+                <ImageView
+                    android:id="@+id/ivCheck"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_gravity="end"
+                    android:layout_height="@dimen/dp30"
+                    android:src="@drawable/ic_check"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linOpt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:background="@drawable/rounded_corner_unselected"
+                android:paddingTop="@dimen/dp10"
+                android:paddingBottom="@dimen/dp10"
+                android:paddingLeft="@dimen/dp20"
+                android:paddingRight="@dimen/dp20"
+                >
+
+                <TextView
+                    android:id="@+id/tvOtpTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Get OTP"
+                    android:textSize="@dimen/t16sp"
+                    app:fontFamily="@font/roboto_regular"/>
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/dp15"
+                android:background="#c0c0c0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp20"
+                android:text="@string/not_registered_yet_register_to_listen_books_with_greate_content"
+                android:textColor="@color/black"
+                app:fontFamily="@font/roboto_regular" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

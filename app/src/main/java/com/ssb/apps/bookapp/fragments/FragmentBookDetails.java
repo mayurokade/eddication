@@ -7,12 +7,9 @@ import android.view.ViewGroup;
 
 import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.adapter.BooKListAudioAdapter;
-import com.ssb.apps.bookapp.adapter.BookListAdapter;
 import com.ssb.apps.bookapp.databinding.FragmentBookDetailBinding;
-import com.ssb.apps.bookapp.model.DashboardResModel;
-import com.ssb.apps.bookapp.model.FilesModel;
-
-import java.util.ArrayList;
+import com.ssb.apps.bookapp.model.BookInfoModel;
+import com.ssb.apps.bookapp.utils.IOUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class FragmentBookDetails extends Fragment {
     FragmentBookDetailBinding binding;
-    DashboardResModel.BookData data;
+    BookInfoModel data;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,9 +36,14 @@ public class FragmentBookDetails extends Fragment {
     }
 
     private void init() {
-        data = (DashboardResModel.BookData) getArguments().getSerializable("data");
-        binding.rvListAudio.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
-        binding.rvListAudio.setAdapter(new BooKListAudioAdapter(getActivity(), new ArrayList<FilesModel>()));
+        data = (BookInfoModel) getArguments().getSerializable("data");
+        binding.rvListAudio.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        if (data.getChapterInfo().getChapterData() != null && data.getChapterInfo().getChapterData().size() > 0) {
+            binding.rvListAudio.setAdapter(new BooKListAudioAdapter(getActivity(), data.getChapterInfo().getChapterData(), data.getChapterInfo().getChapterAudioPath()));
+        }else{
+            IOUtils.showAlertDialog(getActivity(),getActivity().getString(R.string.alert),getActivity().getString(R.string.show));
+        }
+
     }
 
 }

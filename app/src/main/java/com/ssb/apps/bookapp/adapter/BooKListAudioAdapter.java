@@ -1,20 +1,18 @@
 package com.ssb.apps.bookapp.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.databinding.ItemBookAudioBinding;
-import com.ssb.apps.bookapp.databinding.ItemBookListBinding;
-import com.ssb.apps.bookapp.model.FilesModel;
+import com.ssb.apps.bookapp.model.BookInfoModel;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class BooKListAudioAdapter extends RecyclerView.Adapter<BooKListAudioAdapter.MyViewHolder> {
@@ -22,13 +20,16 @@ public class BooKListAudioAdapter extends RecyclerView.Adapter<BooKListAudioAdap
     public static final String TAG = BookListAdapter.class.getName();
     private LayoutInflater layoutInflater;
     private Context mcontext;
-    List<FilesModel> list;
+    List<BookInfoModel.ChapterDatum> list;
+    String path = "";
 
-    public BooKListAudioAdapter(Activity activity, List<FilesModel> meetingModelList) {
+
+    public BooKListAudioAdapter(FragmentActivity activity, List<BookInfoModel.ChapterDatum> chapterData, String chapterAudioPath) {
         this.mcontext = activity;
-        this.list = meetingModelList;
-
+        this.list = chapterData;
+        this.path = chapterAudioPath;
     }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,16 +42,17 @@ public class BooKListAudioAdapter extends RecyclerView.Adapter<BooKListAudioAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-holder.itemBookAudioBinding.chapter.setText("Chapter "+(position+1));
+        holder.itemBookAudioBinding.chapter.setText(list.get(position).getChapterName());
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return list == null ? 0 : list.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ItemBookAudioBinding itemBookAudioBinding;
+
         public MyViewHolder(@NonNull ItemBookAudioBinding itemView) {
             super(itemView.getRoot());
             this.itemBookAudioBinding = itemView;

@@ -1,6 +1,8 @@
 package com.ssb.apps.bookapp.api;
+import com.ssb.apps.bookapp.model.BookInfoModel;
 import com.ssb.apps.bookapp.model.CategotryResModel;
 import com.ssb.apps.bookapp.model.DashboardResModel;
+import com.ssb.apps.bookapp.model.ReviewModel;
 import com.ssb.apps.bookapp.model.RoutModel;
 import com.ssb.apps.bookapp.model.SearchResModel;
 import com.ssb.apps.bookapp.model.UserDetailsModel;
@@ -57,6 +59,20 @@ public interface ApiInterface {
                                             @Field("searchType") String searchType,
                                             @Field("catId") String catId,
                                             @Field("searchKeyword") String searchKeyword );
+
+    @FormUrlEncoded
+    @POST("/app_book")
+    Call<BookInfoModel> getBookInfo(@Header("secId") String secId,
+                                             @Header("secToken") String secToken,
+                                             @Header("request") String request,
+                                             @Field("bookId") String bookId);
+
+    @FormUrlEncoded
+    @POST("/app_all_book_review")
+        Call<ReviewModel> getBookReview(@Header("secId") String secId,
+                                    @Header("secToken") String secToken,
+                                    @Header("request") String request,
+                                    @Field("bookId") String bookId);
 
    /* @POST("Authentication/Valida teUser")
     Call<UserDetails> getUserDetails(@Query("userId") String userId,

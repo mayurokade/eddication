@@ -2,6 +2,7 @@ package com.ssb.apps.bookapp.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,6 +12,7 @@ import com.ssb.apps.bookapp.activities.MainActivity;
 import com.ssb.apps.bookapp.apps.BookApp;
 import com.ssb.apps.bookapp.databinding.ItemBookListBinding;
 import com.ssb.apps.bookapp.fragments.FragmentBookDetails;
+import com.ssb.apps.bookapp.fragments.FragmentBookInfo;
 import com.ssb.apps.bookapp.model.DashboardResModel;
 import com.ssb.apps.bookapp.utils.Constant;
 import com.ssb.apps.bookapp.utils.IOUtils;
@@ -68,8 +70,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.MyView
             this.itemBookListBinding = itemView;
             itemView.getRoot().setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
+                Log.e(TAG, "MyViewHolder: data "+list.get(getAdapterPosition()) );
                 bundle.putSerializable("data",list.get(getAdapterPosition()) );
-                FragmentBookDetails fragment = new FragmentBookDetails();
+                FragmentBookInfo fragment = new FragmentBookInfo();
                  fragment.setArguments(bundle);
                 ((MainActivity) mcontext).loadFragment(fragment);
             });

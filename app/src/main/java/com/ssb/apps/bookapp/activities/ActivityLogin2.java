@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -373,10 +374,17 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                         }*/
                     }
                 });
-                txt_pin_entry.setOnClickListener(v->{
+                /*txt_pin_entry.setOnClickListener(v->{
                     IOUtils.showKeyBoard(ActivityLogin2.this);
-                });
+                });*/
 
+                txt_pin_entry.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        IOUtils.showKeyBoard(ActivityLogin2.this);
+                        return false;
+                    }
+                });
                 linOtpSelected.setOnClickListener(v -> {
                     if (txt_pin_entry.getText().toString().length()>4) {
                         Toast.makeText(ActivityLogin2.this, "SUCCESS", Toast.LENGTH_SHORT).show();
@@ -469,6 +477,7 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                             otp[0] = "" + response.body().getOpt();
                             binding.viewPagerVertical.setCurrentItem(2);
                             overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
+                            IOUtils.showKeyBoard(ActivityLogin2.this);
                         } else {
                             IOUtils.stopLoadingView();
                             IOUtils.showAlertDialog(ActivityLogin2.this, response.body().getMsg(), getString(R.string.msg_contact_admin));// show alert dialog if invalid credential

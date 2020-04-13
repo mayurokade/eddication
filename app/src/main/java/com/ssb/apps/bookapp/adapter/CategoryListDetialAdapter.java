@@ -10,6 +10,7 @@ import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.activities.MainActivity;
 import com.ssb.apps.bookapp.databinding.ItemCategoryListBinding;
 import com.ssb.apps.bookapp.fragments.FragmentBookDetails;
+import com.ssb.apps.bookapp.fragments.FragmentBookInfo;
 import com.ssb.apps.bookapp.model.DashboardResModel;
 import com.ssb.apps.bookapp.utils.IOUtils;
 
@@ -65,7 +66,7 @@ public class CategoryListDetialAdapter extends RecyclerView.Adapter<CategoryList
             itemView.getRoot().setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("data",list.get(getAdapterPosition()) );
-                FragmentBookDetails fragment = new FragmentBookDetails();
+                FragmentBookInfo fragment = new FragmentBookInfo();
                 fragment.setArguments(bundle);
                 ((MainActivity) mcontext).loadFragment(fragment);
             });

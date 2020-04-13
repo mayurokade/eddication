@@ -498,7 +498,16 @@ public class DashboardResModel implements Serializable {
             this.bookCoverImage = bookCoverImage;
         }
 
-
+        @Override
+        public String toString() {
+            return "BookData{" +
+                    "bookId='" + bookId + '\'' +
+                    ", bookName='" + bookName + '\'' +
+                    ", bookHindiName='" + bookHindiName + '\'' +
+                    ", bookCoverImage='" + bookCoverImage + '\'' +
+                    ", autherName='" + autherName + '\'' +
+                    '}';
+        }
     }
 
 }

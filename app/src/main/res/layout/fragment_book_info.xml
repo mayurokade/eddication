@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.FragmentBookInfo">
+
+    <data>
+
+        <variable
+            name="bookInfo"
+            type="com.ssb.apps.bookapp.model.BookInfoModel.BookInfoData" />
+        <variable
+            name="bookDetails"
+            type="com.ssb.apps.bookapp.model.DashboardResModel.BookData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp200"
+                    android:padding="@dimen/dp10"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/coverpaeg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp10">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about_auther"
+                            android:textColor="@color/black"
+                            android:layout_centerInParent="true"
+                            android:layout_alignParentLeft="true"
+                            android:textSize="@dimen/t14sp"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <TextView
+                            android:id="@+id/tv_view_all"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View All Capter"
+                            android:padding="@dimen/dp5"
+                            android:background="@drawable/rounded_corner_selected"
+                            android:textColor="@color/black"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/t14sp"
+                            app:fontFamily="@font/roboto_regular"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp30"
+                            android:layout_height="@dimen/dp30"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_profile" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:paddingLeft="@dimen/dp10"
+                            android:text="@{bookDetails.autherName}"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/t16sp"
+                            app:fontFamily="@font/roboto_regular" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:text="@{bookInfo.book_desc}"
+                        android:textSize="@dimen/t14sp"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:background="@color/gray" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:text="@string/review"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/t14sp"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvReview"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

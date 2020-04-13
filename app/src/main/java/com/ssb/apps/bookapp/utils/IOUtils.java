@@ -1015,4 +1015,9 @@ public class IOUtils {
 
         return version;
     }
+
+    public static void showKeyBoard(Context context ) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+    }
 }

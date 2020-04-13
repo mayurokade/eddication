@@ -14,14 +14,14 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/dp130"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:cardCornerRadius="5dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
             android:orientation="vertical"
@@ -29,7 +29,7 @@
 
             <ImageView
                 android:id="@+id/itemImage"
-                android:layout_width="@dimen/dp120"
+                android:layout_width="@dimen/dp100"
                 android:layout_height="@dimen/dp100"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitXY"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{bookDetails.bookName}"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/t14sp"
+                android:textSize="@dimen/t16sp"
                 android:maxLines="1"
                 app:fontFamily="@font/roboto_regular" />
 
@@ -50,12 +50,23 @@
                 android:id="@+id/tvAuthName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp5"
                 android:text="@{bookDetails.autherName}"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/t14sp"
                 android:maxLines="1"
                 app:fontFamily="@font/roboto_regular" />
+
+            <com.whinc.widget.ratingbar.RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp25"
+                app:rb_click_rating="false"
+                app:rb_count="3"
+                app:rb_empty="@drawable/empty"
+                app:rb_fill="@drawable/fill"
+                app:rb_max_count="5"
+                app:rb_space="1dp"
+                app:rb_touch_rating="true" />
 
         </LinearLayout>
 

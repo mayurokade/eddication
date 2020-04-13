@@ -72,6 +72,7 @@
     <dimen name="dp260">260dp</dimen>
     <dimen name="dialog_width">250dp</dimen>
     <dimen name="dp170">170dp</dimen>
+    <dimen name="dp180">180dp</dimen>
     <dimen name="dp11">11dp</dimen>
     <dimen name="dp140">140dp</dimen>
     <dimen name="sp30">30sp</dimen>

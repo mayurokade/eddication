@@ -21,8 +21,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_height="@dimen/dp50"
+               >
 
                 <AutoCompleteTextView
                     android:id="@+id/search_box"
@@ -33,7 +33,7 @@
                     android:dropDownVerticalOffset="5dp"
                     android:inputType="textAutoComplete|textAutoCorrect"
                     android:popupBackground="@color/white"
-                    android:textColor="#000"></AutoCompleteTextView>
+                    android:textColor="#000"/>
                 <TextView
                     android:id="@+id/tv_all_category"
                     android:layout_width="wrap_content"
@@ -49,8 +49,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_height="@dimen/dp200"
                 android:orientation="vertical">
 
                 <TextView
@@ -65,14 +64,14 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_latest_books"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp5"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/dp200"
                 android:layout_marginTop="@dimen/dp10"
-                android:layout_weight="3"
                 android:orientation="vertical">
 
                 <TextView
@@ -87,14 +86,14 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_listeners_choice"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dp5"
                     android:layout_height="match_parent" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/dp200"
                 android:layout_marginTop="@dimen/dp10"
-                android:layout_weight="3"
                 android:orientation="vertical">
 
                 <TextView
@@ -114,9 +113,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/dp200"
                 android:layout_marginTop="@dimen/dp10"
-                android:layout_weight="3"
                 android:orientation="vertical">
 
                 <TextView
@@ -131,6 +129,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_more_books"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dp5"
                     android:layout_height="match_parent" />
             </LinearLayout>
 

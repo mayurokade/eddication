@@ -2,6 +2,7 @@ package com.ssb.apps.bookapp.api;
 import com.ssb.apps.bookapp.model.CategotryResModel;
 import com.ssb.apps.bookapp.model.DashboardResModel;
 import com.ssb.apps.bookapp.model.RoutModel;
+import com.ssb.apps.bookapp.model.SearchResModel;
 import com.ssb.apps.bookapp.model.UserDetailsModel;
 
 import org.json.JSONObject;
@@ -47,6 +48,15 @@ public interface ApiInterface {
     Call<CategotryResModel> getCategoryDetails(@Header("secId") String secId,
                                                 @Header("secToken") String secToken,
                                                 @Header("request") String request );
+
+    @FormUrlEncoded
+    @POST("/app_search")
+    Call<SearchResModel> getSearchDetails(@Header("secId") String secId,
+                                            @Header("secToken") String secToken,
+                                            @Header("request") String request,
+                                            @Field("searchType") String searchType,
+                                            @Field("catId") String catId,
+                                            @Field("searchKeyword") String searchKeyword );
 
    /* @POST("Authentication/Valida teUser")
     Call<UserDetails> getUserDetails(@Query("userId") String userId,

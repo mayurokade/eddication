@@ -373,6 +373,9 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                         }*/
                     }
                 });
+                txt_pin_entry.setOnClickListener(v->{
+                    IOUtils.showKeyBoard(ActivityLogin2.this);
+                });
 
                 linOtpSelected.setOnClickListener(v -> {
                     if (txt_pin_entry.getText().toString().length()>4) {

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ssb.apps.bookapp.R;
+import com.ssb.apps.bookapp.activities.MainActivity;
 import com.ssb.apps.bookapp.adapter.BookListAdapter;
 import com.ssb.apps.bookapp.adapter.CategoryListAdapter;
 import com.ssb.apps.bookapp.api.ApiClient;
@@ -97,6 +98,12 @@ FragmentCategoryBinding binding;
     private void init() {
         apiService = ApiClient.getClient().create(ApiInterface.class);
         binding.rvCategory.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).setTitleText("Categories");
     }
 
 

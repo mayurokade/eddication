@@ -1,17 +1,17 @@
 package com.ssb.apps.bookapp.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.activities.MainActivity;
 import com.ssb.apps.bookapp.databinding.ItemCategoryBinding;
-import com.ssb.apps.bookapp.fragments.FragmentBookDetails;
+import com.ssb.apps.bookapp.fragments.CategoryListFragment;
 import com.ssb.apps.bookapp.model.CategotryResModel;
-import com.ssb.apps.bookapp.model.DashboardResModel;
+import com.ssb.apps.bookapp.utils.IOUtils;
 
 import java.util.List;
 
@@ -26,11 +26,11 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     private LayoutInflater layoutInflater;
     private Context mcontext;
     List<CategotryResModel.CategoryDatum> list;
-    String imagePath= "";
+    String imagePath = "";
 
     public CategoryListAdapter(FragmentActivity activity, List<CategotryResModel.CategoryDatum> latestData) {
         this.list = latestData;
-        this.mcontext =activity;
+        this.mcontext = activity;
     }
 
     @NonNull
@@ -39,33 +39,38 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
-        ItemCategoryBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_category, parent,false);
+        ItemCategoryBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.item_category, parent, false);
         return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if(list.size()>0){
+        if (list.size() > 0) {
             holder.itemCategoryBinding.setCategoryItem(list.get(position));
         }
     }
 
     @Override
     public int getItemCount() {
-        return list == null?0:list.size();
+        return list == null ? 0 : list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemCategoryBinding itemCategoryBinding;
+
         public ViewHolder(@NonNull ItemCategoryBinding itemView) {
             super(itemView.getRoot());
             this.itemCategoryBinding = itemView;
-            itemView.getRoot().setOnClickListener(v->{
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("data",list.get(getAdapterPosition()) );
-                FragmentBookDetails fragment = new FragmentBookDetails();
-                fragment.setArguments(bundle);
-                ((MainActivity) mcontext).loadFragment(fragment);
+            itemView.getRoot().setOnClickListener(v -> {
+                if (Integer.parseInt(list.get(getAdapterPosition()).getAvailBookCount()) > 0) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("data", list.get(getAdapterPosition()));
+                    CategoryListFragment fragment = new CategoryListFragment();
+                    fragment.setArguments(bundle);
+                    ((MainActivity) mcontext).loadFragment(fragment);
+                }else{
+                    IOUtils.showSnackBar((Activity) mcontext,"No Book available");
+                }
             });
         }
     }

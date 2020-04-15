@@ -457,6 +457,17 @@ public class DashboardResModel implements Serializable {
         @SerializedName("author_name")
         @Expose
         private String autherName;
+        @SerializedName("total_ratings")
+        @Expose
+        private String totalRatings;
+
+        public String getTotalRatings() {
+            return totalRatings;
+        }
+
+        public void setTotalRatings(String totalRatings) {
+            this.totalRatings = totalRatings;
+        }
 
         public String getAutherName() {
             return autherName;

@@ -9,24 +9,27 @@
         <variable
             name="bookInfo"
             type="com.ssb.apps.bookapp.model.BookInfoModel.BookInfoData" />
+
         <variable
             name="bookDetails"
             type="com.ssb.apps.bookapp.model.DashboardResModel.BookData" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true"
-            tools:ignore="MissingConstraints">
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/linOne"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_above="@+id/linBottom"
                 android:orientation="vertical">
 
                 <ImageView
@@ -38,7 +41,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:padding="@dimen/dp10">
 
@@ -49,10 +52,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerInParent="true"
                             android:text="@string/about_auther"
                             android:textColor="@color/black"
-                            android:layout_centerInParent="true"
-                            android:layout_alignParentLeft="true"
                             android:textSize="@dimen/t14sp"
                             app:fontFamily="@font/roboto_regular" />
 
@@ -60,19 +63,19 @@
                             android:id="@+id/tv_view_all"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="View All Capter"
-                            android:padding="@dimen/dp5"
-                            android:background="@drawable/rounded_corner_selected"
-                            android:textColor="@color/black"
                             android:layout_alignParentRight="true"
+                            android:background="@drawable/rounded_corner_selected"
+                            android:padding="@dimen/dp5"
+                            android:text="View All Capter"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/t14sp"
-                            app:fontFamily="@font/roboto_regular"/>
+                            app:fontFamily="@font/roboto_regular" />
                     </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp10"
+                        android:layout_marginTop="@dimen/dp5"
                         android:gravity="center_vertical">
 
                         <ImageView
@@ -89,14 +92,14 @@
                             android:paddingLeft="@dimen/dp10"
                             android:text="@{bookDetails.autherName}"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/t16sp"
+                            android:textSize="@dimen/t14sp"
                             app:fontFamily="@font/roboto_regular" />
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp5"
+                        android:layout_marginTop="@dimen/dp2"
                         android:text="@{bookInfo.book_desc}"
                         android:textSize="@dimen/t14sp"
                         app:fontFamily="@font/roboto_regular" />
@@ -104,7 +107,7 @@
                     <View
                         android:layout_width="fill_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/dp10"
+                        android:layout_marginTop="@dimen/dp5"
                         android:background="@color/gray" />
 
                     <TextView
@@ -119,12 +122,87 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvReview"
                         android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp10" />
 
 
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/linBottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp40"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp35"
+                            android:layout_height="@dimen/dp35"
+                            android:padding="@dimen/dp2"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_profile" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8.5"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/message_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:fadeScrollbars="false"
+                            android:hint="Write review..."
+                            android:inputType="textMultiLine"
+                            android:maxLines="4"
+                            android:minLines="1"
+                            android:scrollbars="vertical"
+                            android:textColor="@android:color/black" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/dp5">
+
+                        <Button
+                            android:id="@+id/btnSend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp25"
+                            android:background="@color/colorAccent"
+                            android:text="@string/str_send"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </layout>

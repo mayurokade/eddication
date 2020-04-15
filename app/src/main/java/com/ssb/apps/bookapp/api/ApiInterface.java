@@ -5,6 +5,7 @@ import com.ssb.apps.bookapp.model.DashboardResModel;
 import com.ssb.apps.bookapp.model.ReviewModel;
 import com.ssb.apps.bookapp.model.RoutModel;
 import com.ssb.apps.bookapp.model.SearchResModel;
+import com.ssb.apps.bookapp.model.StatusModel;
 import com.ssb.apps.bookapp.model.UserDetailsModel;
 
 import org.json.JSONObject;
@@ -73,6 +74,15 @@ public interface ApiInterface {
                                     @Header("secToken") String secToken,
                                     @Header("request") String request,
                                     @Field("bookId") String bookId);
+
+    @FormUrlEncoded
+    @POST("/app_book_review")
+        Call<StatusModel> addBookReview(@Header("secId") String secId,
+                                        @Header("secToken") String secToken,
+                                        @Header("request") String request,
+                                        @Field("bookId") String bookId,
+                                        @Field("reviewStar") String reviewStar,
+                                        @Field("comment") String comment);
 
    /* @POST("Authentication/Valida teUser")
     Call<UserDetails> getUserDetails(@Query("userId") String userId,

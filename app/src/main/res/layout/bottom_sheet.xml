@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp10">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enjoy this book ?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/t16sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp10"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/t14sp"
+            app:fontFamily="@font/roboto_regular"
+            android:text="Make a rating"/>
+        <com.whinc.widget.ratingbar.RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="@dimen/dp100"
+            android:layout_height="@dimen/dp25"
+            app:rb_click_rating="true"
+            android:layout_marginLeft="@dimen/dp10"
+            app:rb_empty="@drawable/empty"
+            app:rb_fill="@drawable/fill"
+            app:rb_max_count="5"
+            app:rb_space="1dp"
+            app:rb_touch_rating="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
+        >
+        <TextView
+            android:id="@+id/tvSkip"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/str_skip"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/sp14"/>
+
+        <TextView
+            android:id="@+id/tvDone"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/str_done"
+            android:textColor="@color/colorAccent"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/sp14"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -58,6 +58,9 @@
     <string name="book_details">Book Details</string>
     <string name="alert">Alert</string>
     <string name="show">Chapter not available</string>
+    <string name="str_send">Send</string>
+    <string name="str_skip">Skip</string>
+    <string name="str_done">Done</string>
 
 
 </resources>

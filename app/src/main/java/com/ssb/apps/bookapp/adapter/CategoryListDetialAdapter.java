@@ -50,6 +50,8 @@ public class CategoryListDetialAdapter extends RecyclerView.Adapter<CategoryList
         if(list.size()>0){
             holder.itemCategoryListBinding.setBookDetails(list.get(position));
             IOUtils.loadImage(mcontext,holder.itemCategoryListBinding.itemImage, imagePath+"/"+list.get(position).getBookCoverImage());
+
+            holder.itemCategoryListBinding.ratingBar.setCount(list.get(position).getTotalRatings() == null? 0:Integer.parseInt(list.get(position).getTotalRatings()));
         }
     }
 

@@ -21,6 +21,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.api.ApiClient;
 import com.ssb.apps.bookapp.api.ApiInterface;
@@ -59,6 +60,8 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
     ApiInterface apiService;
     final int sdk = android.os.Build.VERSION.SDK_INT;
     private String mobileNo = "";
+    String token = "";
+    PinEntryEditText txt_pin_entry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,15 +70,17 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login2);
         if (BookApp.cache.readString(this, Constant.URL, "").isEmpty()) {
             Constant.BASE_URL = "https://ssbdesignapps.in/";
-            Log.e(TAG, "onCreate: base url if "+Constant.BASE_URL);
+            Log.e(TAG, "onCreate: base url if " + Constant.BASE_URL);
             apiService = ApiClient.getClient().create(ApiInterface.class);
             loadRoutApi();
         } else {
             Constant.BASE_URL = "" + BookApp.cache.readString(this, Constant.URL, "");
-            Log.e(TAG, "onCreate: base url else "+Constant.BASE_URL );
+            Log.e(TAG, "onCreate: base url else " + Constant.BASE_URL);
         }
 
 
+        token = FirebaseInstanceId.getInstance().getToken();
+        BookApp.cache.writeString(this, Constant.TOKEN, token);
         adapter = new ViewPagerAdapter();
         binding.viewPagerVertical.setAdapter(adapter);
         binding.viewPagerVertical.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -144,7 +149,7 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
 
     class ViewPagerAdapter extends PagerAdapter {
         private EditText inputRegistrationId, inputMobile, inputOtp;
-        PinEntryEditText txt_pin_entry;
+
         LayoutInflater layoutInflater;
         View view;
 
@@ -366,12 +371,7 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                 txt_pin_entry.setOnPinEnteredListener(new PinEntryEditText.OnPinEnteredListener() {
                     @Override
                     public void onPinEntered(CharSequence str) {
-                        /*if (str.toString().equals(strOTP[0])) {
-                            Toast.makeText(ActivityLogin2.this, "SUCCESS", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(ActivityLogin2.this, "FAIL", Toast.LENGTH_SHORT).show();
-                            txt_pin_entry.setText(null);
-                        }*/
+
                     }
                 });
                 /*txt_pin_entry.setOnClickListener(v->{
@@ -386,12 +386,10 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                     }
                 });
                 linOtpSelected.setOnClickListener(v -> {
-                    if (txt_pin_entry.getText().toString().length()>4) {
-                        Toast.makeText(ActivityLogin2.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                    if (txt_pin_entry.getText().toString().length() > 4) {
                         apiCheckOTP(txt_pin_entry.getText().toString());
                     } else {
-                        //Toast.makeText(ActivityLogin2.this, "FAIL", Toast.LENGTH_SHORT).show();
-                        IOUtils.showSnackBar(ActivityLogin2.this,getString(R.string.enterotp));
+                        IOUtils.showSnackBar(ActivityLogin2.this, getString(R.string.enterotp));
                         txt_pin_entry.setText(null);
                     }
                 });
@@ -399,10 +397,6 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
 
             }
 
-            // TEXTVIEW
-          /*  if(container.getParent() != null) {
-                ((ViewGroup)container.getParent()).removeView(container); // <- fix
-            }*/
             container.addView(view);
             return view;
         }
@@ -422,7 +416,7 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
             IOUtils.startLoadingView(this);
 
 
-            Call<UserDetailsModel> call = apiService.getUserDetails(mobileNo,txt_pin_entry,"sdfsdfsdfgsdfgsdfg");
+            Call<UserDetailsModel> call = apiService.getUserDetails(mobileNo, txt_pin_entry, "" + token);
             call.enqueue(new Callback<UserDetailsModel>() {
                 @Override
                 public void onResponse(Call<UserDetailsModel> call, Response<UserDetailsModel> response) {
@@ -430,12 +424,12 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                     if (response.code() == Constant.FLAG_SUCCESS) {
                         if (response.body().getStatus() == true) {
                             IOUtils.stopLoading();
-                            Log.e(TAG, "onResponse: user id "+response.body().getShopData().getUserId() );
-                            BookApp.cache.writeString(ActivityLogin2.this,Constant.USERID,""+response.body().getShopData().getUserId());
-                            BookApp.cache.writeString(ActivityLogin2.this,Constant.USER_NAME,""+response.body().getShopData().getUserName());
-                            BookApp.cache.writeString(ActivityLogin2.this,Constant.MOBILE,""+response.body().getShopData().getUserMobile());
-                            BookApp.cache.writeString(ActivityLogin2.this,Constant.TOKEN,""+response.body().getShopData().getUserToken());
-                            BookApp.cache.writeBoolean(ActivityLogin2.this,Constant.ISLOGIN,true);
+                            Log.e(TAG, "onResponse: user id " + response.body().getShopData().getUserId());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.USERID, "" + response.body().getShopData().getUserId());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.USER_NAME, "" + response.body().getShopData().getUserName());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.MOBILE, "" + response.body().getShopData().getUserMobile());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.TOKEN, "" + response.body().getShopData().getUserToken());
+                            BookApp.cache.writeBoolean(ActivityLogin2.this, Constant.ISLOGIN, true);
                             startActivity(new Intent(ActivityLogin2.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
@@ -507,11 +501,13 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
         }
         if (binding.viewPagerVertical.getCurrentItem() == 1) {
             binding.viewPagerVertical.setCurrentItem(0);
+            etNum.setText("");
             overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
         }
         if (binding.viewPagerVertical.getCurrentItem() == 2) {
             //showQuitSignupDialog();
             binding.viewPagerVertical.setCurrentItem(1);
+            txt_pin_entry.setText("");
             overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
         }
     }

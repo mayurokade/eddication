@@ -101,6 +101,16 @@ public class BookInfoModel implements Serializable {
         @Expose
         private String dtAddedon;
 
+        boolean isStart = false;
+
+        public boolean isStart() {
+            return isStart;
+        }
+
+        public void setStart(boolean start) {
+            isStart = start;
+        }
+
         public String getChapterId() {
             return chapterId;
         }
@@ -189,6 +199,17 @@ public class BookInfoModel implements Serializable {
         @SerializedName("HasUserPaid")
         @Expose
         private Boolean hasUserPaid;
+        @SerializedName("book_banner_image")
+        @Expose
+        private Boolean bookBannerImage;
+
+        public Boolean getBookBannerImage() {
+            return bookBannerImage;
+        }
+
+        public void setBookBannerImage(Boolean bookBannerImage) {
+            this.bookBannerImage = bookBannerImage;
+        }
 
         public String getBook_desc() {
             return book_desc;

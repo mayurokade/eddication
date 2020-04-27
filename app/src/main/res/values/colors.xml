@@ -479,6 +479,7 @@
     <color name="language_header_txt_color">#344466</color>
     <color name="language_select_txt_color">#0c50b5</color>
     <color name="icon_color">#3B9149</color>
+    <color name="banner_color">#62c4b3</color>
 
     <color name="defaultOutlineAmbientShadowColor">#0A000000</color>
     <color name="defaultOutlineSpotShadowColor">#30000000</color>

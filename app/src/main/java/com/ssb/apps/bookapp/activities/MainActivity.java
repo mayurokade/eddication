@@ -1,14 +1,5 @@
 package com.ssb.apps.bookapp.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,14 +8,22 @@ import android.widget.ImageView;
 import com.google.android.material.navigation.NavigationView;
 import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.fragments.BlankFragment;
+import com.ssb.apps.bookapp.fragments.FragmentBucket;
 import com.ssb.apps.bookapp.fragments.FragmentDashboard;
-import com.ssb.apps.bookapp.utils.Constant;
 import com.ssb.apps.bookapp.utils.DialogAlertUtils;
 import com.ssb.apps.bookapp.utils.DialogUniversalErrorUtils;
 import com.ssb.apps.bookapp.utils.DialogUniversalSuccessUtils;
 import com.ssb.apps.bookapp.utils.IOUtils;
 
 import java.util.Objects;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         DialogAlertUtils.OnAlertDialogClickListener, DialogUniversalErrorUtils.OnErrorBtnClick,
@@ -38,12 +37,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     public Toolbar toolbar;
     ImageView img_notification;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       // IOUtils.setStatusBarColor(MainActivity.this);
+        // IOUtils.setStatusBarColor(MainActivity.this);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         navMenu = findViewById(R.id.nav_view);
@@ -105,7 +105,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.menu_dashboard) {
             loadFragment(new FragmentDashboard());
 
-        }else{
+        }
+        if (id == R.id.menu_ic_bucket) {
+            loadFragment(new FragmentBucket());
+        } else {
             loadFragment(new BlankFragment());
         }
 
@@ -123,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void loadFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_right, R.anim.exit_left,R.anim.enter_right, R.anim.exit_left).addToBackStack(null).replace(R.id.frame_container, fragment).commit();
+        getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.enter_right, R.anim.exit_left, R.anim.enter_right, R.anim.exit_left).addToBackStack(null).replace(R.id.frame_container, fragment).commit();
     }
 
     public void loadFragment(Fragment fragment, Fragment currentFragment) {
@@ -135,8 +138,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toolbar.setTitle(title.toUpperCase());
         }
     }
-
-
 
 
     @Override

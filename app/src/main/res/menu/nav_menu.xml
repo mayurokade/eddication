@@ -16,6 +16,12 @@
         android:title="@string/menu_profile" />
 
     <item
+        android:id="@+id/menu_ic_bucket"
+
+        android:iconTint="@color/colorPrimary"
+        android:title="@string/str_bucket" />
+
+    <item
         android:id="@+id/menu_helpus"
 
         android:iconTint="@color/colorPrimary"

@@ -4,6 +4,7 @@
     <string name="login">Login</string>
     <string name="str_currency_code">&#8377;&#160;</string>
     <string name="msg_please_Wait">Please wait</string>
+    <string name="notification_channel_id">com.ssb.apps.bookapp</string>
     <string name="msg_internet_connection">No Internet connection available, please check your connection.</string>
     <string name="str_error">Error</string>
     <string name="button_cancel">Cancel</string>
@@ -61,6 +62,7 @@
     <string name="str_send">Send</string>
     <string name="str_skip">Skip</string>
     <string name="str_done">Done</string>
+    <string name="str_bucket">Bucket</string>
 
 
 </resources>

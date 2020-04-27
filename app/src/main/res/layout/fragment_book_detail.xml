@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -10,18 +11,176 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <ImageView
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp200"
-                android:padding="@dimen/dp10"
-                android:src="@drawable/coverpaeg"
-                android:scaleType="fitXY"/>
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp10">
+
+                    <ImageView
+                        android:id="@+id/ivBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp150"
+                        android:alpha="0.4"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/coverpaeg" />
+
+                    <TextView
+                        android:id="@+id/tvBookName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp5"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp16"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <TextView
+                        android:id="@+id/tvAutherName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvBookName"
+                        android:layout_marginLeft="@dimen/dp5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp14"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <TextView
+                        android:id="@+id/tvCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvAutherName"
+                        android:layout_marginLeft="@dimen/dp5"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp14"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <com.whinc.widget.ratingbar.RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="@dimen/dp100"
+                        android:layout_height="@dimen/dp30"
+                        android:layout_below="@+id/tvCategory"
+                        app:rb_click_rating="false"
+                        app:rb_empty="@drawable/empty"
+                        app:rb_fill="@drawable/fill"
+                        app:rb_max_count="5"
+                        app:rb_touch_rating="true" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true">
+
+                        <ImageView
+                            android:id="@+id/ivShare"
+                            android:layout_width="@dimen/dp35"
+                            android:layout_height="@dimen/dp35"
+                            android:src="@drawable/ic_share"
+                            android:scaleType="fitXY"
+                            android:layout_marginRight="@dimen/dp5"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"/>
+
+                        <ImageView
+                            android:id="@+id/ivBucket"
+                            android:layout_width="@dimen/dp35"
+                            android:layout_height="@dimen/dp35"
+                            android:src="@drawable/ic_bucket"
+                            android:scaleType="fitXY"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:layout_marginRight="@dimen/dp5"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp30"
+                        android:layout_below="@+id/ivBanner"
+                        android:background="@color/material_blue_gray_900"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/ivMusicBtn"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/dp30"
+                            android:layout_weight="0.2"
+                            android:src="@drawable/ic_pause" />
+
+                        <TextView
+                            android:id="@+id/tvCompleted"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:gravity="center_vertical"
+                            android:text="0.00"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp14"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <SeekBar
+                            android:id="@+id/seekBar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:theme="@style/SeekBarColor" />
+
+                        <TextView
+                            android:id="@+id/tvTotalTime"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:gravity="center_vertical"
+                            android:text="0.00"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp14"
+                            app:fontFamily="@font/roboto_regular" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+
+                <LinearLayout
+                    android:id="@+id/llPrise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_marginRight="@dimen/dp5"
+                    android:background="@color/banner_color"
+                    android:padding="@dimen/dp5">
+
+                    <TextView
+                        android:id="@+id/tvPrise"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvBookName"
+                        android:background="@color/banner_color"
+                        android:paddingRight="@dimen/dp5"
+                        android:paddingLeft="@dimen/dp10"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp14"
+
+                        app:fontFamily="@font/roboto_regular" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list_audio"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 </layout>

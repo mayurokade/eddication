@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="bucket_data"
+            type="com.ssb.apps.bookapp.model.DashboardResModel.BookData" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp5"
+        app:cardCornerRadius="@dimen/dp5"
+        app:cardElevation="@dimen/dp5">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp100"
+            android:layout_weight="2" >
+            <ImageView
+                android:id="@+id/ivBanner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/coverpaeg"
+                android:scaleType="fitXY"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp5">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{bucket_data.bookName}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/sp16"
+                android:layout_marginTop="@dimen/dp10"
+                android:maxLines="1"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_regular" />
+
+            <TextView
+                android:id="@+id/tvAuthName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="@{`By: ` +bucket_data.autherName}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/t14sp"
+                android:maxLines="1"
+                app:fontFamily="@font/roboto_regular" />
+           <!--<TextView
+                android:id="@+id/tvCatName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp5"
+                android:text="@{`Category: ` +bucketData.}"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/t14sp"
+                android:maxLines="1"
+                app:fontFamily="@font/roboto_regular" />-->
+            <com.whinc.widget.ratingbar.RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="@dimen/dp100"
+                android:layout_height="@dimen/dp25"
+                app:rb_click_rating="false"
+                app:rb_empty="@drawable/empty"
+                app:rb_fill="@drawable/fill"
+                app:rb_max_count="5"
+                app:rb_touch_rating="true" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_delete"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -35,7 +35,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.MyView
     public BookListAdapter(FragmentActivity activity, List<DashboardResModel.BookData> latestData, int i, String bookImagePath) {
         this.list = latestData;
         this.imagePath = bookImagePath;
-        this.mcontext =activity;
+        this.mcontext = activity;
     }
 
 

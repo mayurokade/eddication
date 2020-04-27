@@ -74,7 +74,7 @@ public class FragmentBookInfo extends Fragment {
             }
         });
         loadCategory();
-        loadReview();
+        loadReview(false);
 
         binding.btnSend.setOnClickListener(v -> {
             if (!binding.messageText.getText().toString().isEmpty()) {
@@ -83,7 +83,46 @@ public class FragmentBookInfo extends Fragment {
 
             }
         });
+        binding.ivBucket.setOnClickListener(v -> {
+            callAddBookInBuket();
+        });
     }
+
+    private void callAddBookInBuket() {
+        if (IOUtils.isConnected(getActivity())) {
+            IOUtils.hideKeyBoard(getActivity());
+            //show progress dialog
+            IOUtils.startLoadingView(getActivity());
+            Call<StatusModel> call = apiService.addBookBucket(BookApp.cache.readString(getActivity(), Constant.USERID, ""),
+                    BookApp.cache.readString(getActivity(), Constant.TOKEN, ""), "1", bookInfoModel.getBookInfo().getBookInfoData().getBookId());
+            call.enqueue(new Callback<StatusModel>() {
+                @Override
+                public void onResponse(Call<StatusModel> call, Response<StatusModel> response) {
+                    IOUtils.stopLoading();
+                    if (response.code() == Constant.FLAG_SUCCESS) {
+                        if (response.body().getStatus() == true) {
+                            IOUtils.showSnackBar(getActivity(), response.body().getMsg());
+                        } else {
+                            if (response.body().getMsg().contains("Invalid")) {
+                                IOUtils.logout(getActivity());
+                            } else {
+                                IOUtils.errorShowSnackBar(getActivity(), response.body().getMsg());// show alert dialog if invalid credential
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<StatusModel> call, Throwable t) {
+                    IOUtils.stopLoadingView();
+                    IOUtils.showAlertDialog(getActivity(), getString(R.string.error_message), getString(R.string.something_went));// show alert dialog if invalid credential
+                }
+            });
+
+        } else
+            IOUtils.showSnackBar(getActivity(), getString(R.string.err_internet));
+    }
+
 
     private void openDialog() {
         BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
@@ -117,7 +156,7 @@ public class FragmentBookInfo extends Fragment {
                     IOUtils.stopLoading();
                     if (response.code() == Constant.FLAG_SUCCESS) {
                         if (response.body().getStatus() == true) {
-                            loadReview();
+                            loadReview(true);
                         } else {
                             if (response.body().getMsg().contains("Invalid")) {
                                 IOUtils.logout(getActivity());
@@ -139,7 +178,7 @@ public class FragmentBookInfo extends Fragment {
             IOUtils.showSnackBar(getActivity(), getString(R.string.err_internet));
     }
 
-    private void loadReview() {
+    private void loadReview(boolean isMove) {
         if (IOUtils.isConnected(getActivity())) {
             IOUtils.hideKeyBoard(getActivity());
             //show progress dialog
@@ -154,12 +193,13 @@ public class FragmentBookInfo extends Fragment {
                         if (response.body().getBookReviewList().getStatus() == true) {
                             binding.messageText.setText("");
                             binding.rvReview.setAdapter(new ReviewAdapter(getActivity(), response.body().getBookReviewList().getBookReviewData(), 1, response.body().getBookReviewList().getUserProfilePath()));
-                            binding.rvReview.scrollToPosition(response.body().getBookReviewList().getBookReviewData().size()-1);
+                            if (isMove)
+                                binding.rvReview.scrollToPosition(response.body().getBookReviewList().getBookReviewData().size() - 1);
                         }
                         if (response.body().getMsg() != null) {
                             if (response.body().getMsg().contains("Invalid")) {
                                 IOUtils.logout(getActivity());
-                            }else{
+                            } else {
                                 IOUtils.showAlertDialog(getActivity(), getString(R.string.error_message), response.body().getMsg());// show alert dialog if invalid credential
                             }
                         }
@@ -194,6 +234,14 @@ public class FragmentBookInfo extends Fragment {
                         if (response.body().getBookInfo().getStatus() == true) {
                             binding.setBookInfo(response.body().getBookInfo().getBookInfoData());
                             bookInfoModel = response.body();
+                            binding.tvBookName.setText("" + bookInfoModel.getBookInfo().getBookInfoData().getBookName());
+                            binding.tvAutherName.setText("By : " + bookInfoModel.getBookInfo().getBookInfoData().getBookCatName());
+                            binding.tvCategory.setText("Category : " + bookInfoModel.getBookInfo().getBookInfoData().getBookCatName());
+                            binding.ratingBar.setCount(Integer.parseInt(bookInfoModel.getBookInfo().getBookInfoData().getAvgRating()));
+                            binding.seekBar.setMax(100);
+                            binding.tvPrise.setText("Rs. " + bookInfoModel.getBookInfo().getBookInfoData().getBookPrice());
+
+
                         }
                         if (response.body().getMsg() != null) {
                             if (response.body().getMsg().contains("Invalid")) {

@@ -52,7 +52,8 @@
                         android:id="@+id/iv_button"
                         android:layout_width="@dimen/dp30"
                         android:layout_height="30dp"
-                        android:src="@drawable/ic_pause"/>
+                        android:scaleType="fitXY"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

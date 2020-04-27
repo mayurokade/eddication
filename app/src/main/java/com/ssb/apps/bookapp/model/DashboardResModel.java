@@ -461,6 +461,30 @@ public class DashboardResModel implements Serializable {
         @Expose
         private String totalRatings;
 
+        @SerializedName("avg_rating")
+        @Expose
+        private String avgRating;
+
+        @SerializedName("cart_id")
+        @Expose
+        private String cartId;
+
+        public String getCartId() {
+            return cartId;
+        }
+
+        public void setCartId(String cartId) {
+            this.cartId = cartId;
+        }
+
+        public String getAvgRating() {
+            return avgRating;
+        }
+
+        public void setAvgRating(String avgRating) {
+            this.avgRating = avgRating;
+        }
+
         public String getTotalRatings() {
             return totalRatings;
         }

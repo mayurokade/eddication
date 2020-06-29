@@ -8,6 +8,11 @@
     <string name="msg_internet_connection">No Internet connection available, please check your connection.</string>
     <string name="str_error">Error</string>
     <string name="button_cancel">Cancel</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Email</string>
+    <string name="enter_email">Enter your email</string>
+    <string name="enter_password">Enter your password </string>
+    <string name="confirm_password">Confirm your password </string>
     <string name="login_with_number">Login with number</string>
     <string name="login_with_facbook">Login with Facbook</string>
     <string name="not_registered_yet_register_to_listen_books_with_greate_content">Not Registered yet? <b>Register</b> to listen books with greate content.</string>
@@ -26,7 +31,7 @@
     <string name="str_exit">Exit</string>
     <string name="str_are_sure">Are you sure you want exit?</string>
     <string name="str_user_name">User name</string>
-    <string name="str_welcome_">Welcome</string>
+    <string name="str_welcome_">Welcome,</string>
     <string name="dashboard">Dashboard</string>
     <string name="menu_dashboard">Dashboard</string>
     <string name="menu_profile">Profile</string>
@@ -53,6 +58,7 @@
     <string name="enterotp">Enter valid OTP</string>
     <string name="all_categories">All Categories</string>
     <string name="categories">Categories</string>
+    <string name="register_as_wr">Register as writer</string>
     <string name="about_auther">About Auther</string>
     <string name="sample_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="review">Reviews</string>
@@ -63,6 +69,30 @@
     <string name="str_skip">Skip</string>
     <string name="str_done">Done</string>
     <string name="str_bucket">Bucket</string>
+    <string name="registraion">Registraion</string>
+    <string name="register">Register</string>
+    <string name="tr_plz_enter">Please Enter</string>
+    <string name="str_pass_length">Password should be more than 5</string>
+    <string name="str_valid_enter">please enter valid Email</string>
+    <string name="become_author">Become Author</string>
+    <string name="str_pass_same">Password should be same</string>
+    <string name="enter_your_biography">Enter your biography</string>
+    <string name="str_price">Our Price</string>
+    <string name="play_summary">Play Summary</string>
+    <string name="str_success">Payment</string>
+    <string name="str_fail">Payment failed</string>
+    <string name="str_success_book_purchase">Book Purchase successfully</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="books_by_me">Books by Me</string>
+    <string name="my_collection">My Collection</string>
+    <string name="my_revenue">My Revenue</string>
+    <string name="str_myshelf">My Shelf</string>
+    <string name="str_mybucket">My Bucket</string>
+    <string name="str_all_rating">Over All Rating</string>
+    <string name="str_admin_details">Admin panel details</string>
+    <string name="str_pannel_link">Panel Link</string>
+    <string name="str_interest_to_be_writer">Interest to be writer</string>
+    <string name="you_are_currently_listening">You are currently Listening</string>
 
 
 </resources>

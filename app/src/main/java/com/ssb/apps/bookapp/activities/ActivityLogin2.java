@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ import com.alimuzaffar.lib.pin.PinEntryEditText;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -30,10 +33,16 @@ import com.ssb.apps.bookapp.databinding.ActivityLogin2Binding;
 import com.ssb.apps.bookapp.databinding.ActivityLoginBinding;
 import com.ssb.apps.bookapp.databinding.LayoutOtpBinding;
 import com.ssb.apps.bookapp.model.RoutModel;
+import com.ssb.apps.bookapp.model.StatusModel;
 import com.ssb.apps.bookapp.model.UserDetailsModel;
 import com.ssb.apps.bookapp.utils.Constant;
 import com.ssb.apps.bookapp.utils.IOUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,10 +77,10 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         //  setContentView(R.layout.activity_login2);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login2);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
         if (BookApp.cache.readString(this, Constant.URL, "").isEmpty()) {
             Constant.BASE_URL = "https://ssbdesignapps.in/";
             Log.e(TAG, "onCreate: base url if " + Constant.BASE_URL);
-            apiService = ApiClient.getClient().create(ApiInterface.class);
             loadRoutApi();
         } else {
             Constant.BASE_URL = "" + BookApp.cache.readString(this, Constant.URL, "");
@@ -155,7 +164,7 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override
@@ -187,52 +196,54 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                 loginButton = view.findViewById(R.id.login_button);
                 List<String> permissionNeeds = Arrays.asList("user_photos", "email",
                         "user_birthday", "public_profile", "AccessToken");
-               /* loginButton.registerCallback(callbackManager,
-                        new FacebookCallback<LoginResult>() {@Override
-                        public void onSuccess(LoginResult loginResult) {
+                loginButton.setReadPermissions(Arrays.asList("email,user_birthday"));
+                loginButton.registerCallback(callbackManager,
+                        new FacebookCallback<LoginResult>() {
+                            @Override
+                            public void onSuccess(LoginResult loginResult) {
 
-                            System.out.println("onSuccess");
+                                System.out.println("onSuccess");
 
-                            String accessToken = loginResult.getAccessToken()
-                                    .getToken();
-                            Log.e("accessToken", accessToken);
+                                String accessToken = loginResult.getAccessToken()
+                                        .getToken();
+                                Log.e("accessToken", accessToken);
 
-                            GraphRequest request = GraphRequest.newMeRequest(
-                                    loginResult.getAccessToken(),
-                                    new GraphRequest.GraphJSONObjectCallback() {@Override
-                                    public void onCompleted(JSONObject object,
-                                                            GraphResponse response) {
+                                GraphRequest request = GraphRequest.newMeRequest(
+                                        loginResult.getAccessToken(),
+                                        new GraphRequest.GraphJSONObjectCallback() {
+                                            @Override
+                                            public void onCompleted(JSONObject object,
+                                                                    GraphResponse response) {
 
-                                        Log.i("LoginActivity",
-                                                response.toString());
-                                        try {
-                                            id = object.getString("id");
-                                            try {
-                                                URL profile_pic = new URL(
-                                                        "http://graph.facebook.com/" + id + "/picture?type=large");
-                                                Log.e("profile_pic",
-                                                        profile_pic + "");
+                                                Log.i("LoginActivity",
+                                                        response.toString());
+                                                try {
+                                                    id = object.getString("id");
+                                                    try {
+                                                        URL profile_pic = new URL(
+                                                                "http://graph.facebook.com/" + id + "/picture?type=large");
+                                                        Log.e("profile_pic",
+                                                                profile_pic + "");
 
-                                            } catch (MalformedURLException e) {
-                                                e.printStackTrace();
+                                                    } catch (MalformedURLException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    name = object.getString("name");
+                                                    email = object.getString("email");
+                                                    // gender = object.getString("gender");
+                                                    loginWithFB(name, email);
+                                                    Log.e(TAG, "onCompleted: name " + name + "/n email " + email + "/n gender " + gender + "/n bday " + birthday);
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
                                             }
-                                            name = object.getString("name");
-                                            email = object.getString("email");
-                                            gender = object.getString("gender");
-                                            birthday = object.getString("birthday");
-
-                                            Log.e(TAG, "onCompleted: name "+name+"/n email "+email +"/n gender "+gender+"/n bday "+birthday );
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                    });
-                            Bundle parameters = new Bundle();
-                            parameters.putString("fields",
-                                    "id,name,email,gender, birthday");
-                            request.setParameters(parameters);
-                            request.executeAsync();
-                        }
+                                        });
+                                Bundle parameters = new Bundle();
+                                parameters.putString("fields",
+                                        "id,name,email,gender, birthday");
+                                request.setParameters(parameters);
+                                request.executeAsync();
+                            }
 
                             @Override
                             public void onCancel() {
@@ -244,11 +255,16 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                                 System.out.println("onError");
                                 Log.v("LoginActivity", exception.getCause().toString());
                             }
-                        });*/
-                loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                        });
+              /*  loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.e(TAG, "onSuccess: User ID: " + loginResult.getAccessToken().getUserId() + "\n" + "Auth Token: " + loginResult.getAccessToken().getToken());
+                        Log.e(TAG, "onSuccess: name "+loginResult.getAccessToken().getSource().name() );
+                        Log.e(TAG, "onSuccess:  "+loginResult.getAccessToken().get );
+                        Log.e(TAG, "onSuccess: image "+loginResult.getAccessToken().getSource().name() );
+                        Log.e(TAG, "onSuccess: image "+loginResult.getAccessToken().getSource().name() );
+                        Log.e(TAG, "onSuccess: image "+loginResult.getAccessToken().getSource().name() );
                     }
 
                     @Override
@@ -260,7 +276,7 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                     public void onError(FacebookException e) {
                         Log.e(TAG, "onError: Login attempt failed.");
                     }
-                });
+                });*/
 
                 linFacebook.setOnClickListener(v -> {
                     loginButton.performClick();
@@ -285,10 +301,10 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                         if (etNum.getText().toString().length() > 9) {
                             if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                                 linOtp.setBackgroundDrawable(ContextCompat.getDrawable(ActivityLogin2.this, R.drawable.rounded_corner_selected));
-                                tvOtpTitle1.setTextColor(getResources().getColor(R.color.black));
+                                tvOtpTitle1.setTextColor(getResources().getColor(R.color.white));
                             } else {
                                 linOtp.setBackground(ContextCompat.getDrawable(ActivityLogin2.this, R.drawable.rounded_corner_selected));
-                                tvOtpTitle1.setTextColor(ContextCompat.getColor(ActivityLogin2.this, R.color.black));
+                                tvOtpTitle1.setTextColor(ContextCompat.getColor(ActivityLogin2.this, R.color.white));
                             }
                             linOtp.setPadding(40, 20, 40, 20);
                             mobileNo = etNum.getText().toString();
@@ -344,10 +360,10 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
 
                             if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                                 linOtpSelected.setBackgroundDrawable(ContextCompat.getDrawable(ActivityLogin2.this, R.drawable.rounded_corner_selected));
-                                tvOtpTitle.setTextColor(getResources().getColor(R.color.black));
+                                tvOtpTitle.setTextColor(getResources().getColor(R.color.white));
                             } else {
                                 linOtpSelected.setBackground(ContextCompat.getDrawable(ActivityLogin2.this, R.drawable.rounded_corner_selected));
-                                tvOtpTitle.setTextColor(ContextCompat.getColor(ActivityLogin2.this, R.color.black));
+                                tvOtpTitle.setTextColor(ContextCompat.getColor(ActivityLogin2.this, R.color.white));
                             }
                             linOtpSelected.setPadding(40, 20, 40, 20);
                         } else {
@@ -397,6 +413,28 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
 
             }
 
+            if (position == 3) {
+                view = layoutInflater.inflate(R.layout.layout_registration, container, false);
+                EditText etYourName = view.findViewById(R.id.etYourName);
+                EditText etMobileNo = view.findViewById(R.id.etMobileNo);
+                EditText etEmail = view.findViewById(R.id.etEmail);
+                etMobileNo.setKeyListener(null);
+                etMobileNo.setText(mobileNo);
+                ImageView ivClose = view.findViewById(R.id.ivClose);
+                ivClose.setOnClickListener(v -> {
+                    etYourName.setText("");
+                    etEmail.setText("");
+                    binding.viewPagerVertical.setCurrentItem(1);
+                    overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
+                });
+
+                LinearLayout linRegi = view.findViewById(R.id.linRegi);
+                linRegi.setOnClickListener(v -> {
+                    checkValidation(etYourName, etMobileNo, etEmail);
+                });
+
+            }
+
             container.addView(view);
             return view;
         }
@@ -407,6 +445,60 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
             container.removeView(view);
         }
 
+    }
+
+
+    private void checkValidation(EditText etYourName, EditText etMobileNo, EditText etEmail) {
+        if (etYourName.getText().toString().isEmpty()) {
+            etYourName.setError("" + getString(R.string.tr_plz_enter));
+            return;
+        } else if (!IOUtils.isEmailValid(etEmail.getText().toString())) {
+            etEmail.setError("" + getString(R.string.str_valid_enter));
+            return;
+        } else {
+            registerCall(etYourName.getText().toString(), etMobileNo.getText().toString(), etEmail.getText().toString());
+        }
+
+    }
+
+    private void registerCall(String name, String mblNo, String email) {
+        if (IOUtils.isConnected(this)) {
+            IOUtils.hideKeyBoard(this);
+            //show progress dialog
+            IOUtils.startLoadingView(this);
+
+
+            Call<StatusModel> call = apiService.regstrationCall(name, mblNo, email, "1");
+            call.enqueue(new Callback<StatusModel>() {
+                @Override
+                public void onResponse(Call<StatusModel> call, Response<StatusModel> response) {
+                    Log.e(TAG, "onResponse: call " + call.request());
+                    if (response.code() == Constant.FLAG_SUCCESS) {
+                        if (response.body().getStatus() == true) {
+                            IOUtils.stopLoading();
+                            IOUtils.showSnackBar(ActivityLogin2.this, response.body().getMsg());
+                            binding.viewPagerVertical.setCurrentItem(1);
+                            overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
+
+                        } else {
+                            IOUtils.stopLoadingView();
+                            IOUtils.showAlertDialog(ActivityLogin2.this, response.body().getMsg(),
+                                    (response.body().getErrorData().getMobile() == null ? "" : response.body().getErrorData().getMobile())
+                                            + "\n" +
+                                            (response.body().getErrorData().getEmail() == null ? "" : response.body().getErrorData().getEmail()));// show alert dialog if invalid credential
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<StatusModel> call, Throwable t) {
+                    IOUtils.stopLoadingView();
+                    IOUtils.showAlertDialog(ActivityLogin2.this, getString(R.string.error_message), getString(R.string.something_went));// show alert dialog if invalid credential
+                }
+            });
+        } else {
+            IOUtils.showSnackBar(this, getString(R.string.err_internet));
+        }
     }
 
     private void apiCheckOTP(String txt_pin_entry) {
@@ -425,11 +517,15 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                         if (response.body().getStatus() == true) {
                             IOUtils.stopLoading();
                             Log.e(TAG, "onResponse: user id " + response.body().getShopData().getUserId());
+                            Log.e(TAG, "onResponse: user id " + response.body().getShopData().getUserMobile());
+                            Log.e(TAG, "onResponse: user Token " + response.body().getShopData().getUserToken());
+                            Log.e(TAG, "onResponse: user Auther " + response.body().getShopData().isAuthor());
                             BookApp.cache.writeString(ActivityLogin2.this, Constant.USERID, "" + response.body().getShopData().getUserId());
                             BookApp.cache.writeString(ActivityLogin2.this, Constant.USER_NAME, "" + response.body().getShopData().getUserName());
                             BookApp.cache.writeString(ActivityLogin2.this, Constant.MOBILE, "" + response.body().getShopData().getUserMobile());
                             BookApp.cache.writeString(ActivityLogin2.this, Constant.TOKEN, "" + response.body().getShopData().getUserToken());
                             BookApp.cache.writeBoolean(ActivityLogin2.this, Constant.ISLOGIN, true);
+                            BookApp.cache.writeBoolean(ActivityLogin2.this, Constant.ISAUHTHER, response.body().getShopData().isAuthor());
                             startActivity(new Intent(ActivityLogin2.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
@@ -474,7 +570,9 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
                             IOUtils.showKeyBoard(ActivityLogin2.this);
                         } else {
                             IOUtils.stopLoadingView();
-                            IOUtils.showAlertDialog(ActivityLogin2.this, response.body().getMsg(), getString(R.string.msg_contact_admin));// show alert dialog if invalid credential
+                            IOUtils.errorShowSnackBar(ActivityLogin2.this, response.body().getMsg());// show alert dialog if invalid credential
+                            binding.viewPagerVertical.setCurrentItem(3);
+                            overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
                         }
                     }
                 }
@@ -490,6 +588,51 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
             IOUtils.showSnackBar(this, getString(R.string.err_internet));
         }
         return otp[0];
+    }
+
+    private void loginWithFB(String name, String email) {
+        if (IOUtils.isConnected(this)) {
+            IOUtils.hideKeyBoard(this);
+            //show progress dialog
+            IOUtils.startLoadingView(this);
+
+
+            Call<UserDetailsModel> call = apiService.loginWithFb(email, name, "1", token);
+            call.enqueue(new Callback<UserDetailsModel>() {
+                @Override
+                public void onResponse(Call<UserDetailsModel> call, Response<UserDetailsModel> response) {
+                    Log.e(TAG, "onResponse: callfb  " + call.request());
+                    if (response.code() == Constant.FLAG_SUCCESS) {
+                        if (response.body().getStatus() == true) {
+                            IOUtils.stopLoading();
+                            Log.e(TAG, "onResponse: user id " + response.body().getShopData().getUserId());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.USERID, "" + response.body().getShopData().getUserId());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.USER_NAME, "" + response.body().getShopData().getUserName());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.MOBILE, "" + response.body().getShopData().getUserMobile());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.TOKEN, "" + response.body().getShopData().getUserToken());
+                            BookApp.cache.writeString(ActivityLogin2.this, Constant.EMAIL, "" + response.body().getShopData().getUserEmail());
+                            BookApp.cache.writeBoolean(ActivityLogin2.this, Constant.ISLOGIN, true);
+                            BookApp.cache.writeBoolean(ActivityLogin2.this, Constant.ISLOGINFB, true);
+                            BookApp.cache.writeBoolean(ActivityLogin2.this, Constant.ISAUHTHER, response.body().getShopData().isAuthor());
+                            startActivity(new Intent(ActivityLogin2.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
+                        } else {
+                            IOUtils.stopLoadingView();
+                            IOUtils.showAlertDialog(ActivityLogin2.this, response.body().getMsg(), getString(R.string.msg_contact_admin));// show alert dialog if invalid credential
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserDetailsModel> call, Throwable t) {
+                    IOUtils.stopLoadingView();
+                    IOUtils.showAlertDialog(ActivityLogin2.this, getString(R.string.error_message), getString(R.string.something_went));// show alert dialog if invalid credential
+                }
+            });
+        } else {
+            IOUtils.showSnackBar(this, getString(R.string.err_internet));
+        }
     }
 
     @Override
@@ -508,6 +651,11 @@ public class ActivityLogin2 extends AppCompatActivity implements View.OnClickLis
             //showQuitSignupDialog();
             binding.viewPagerVertical.setCurrentItem(1);
             txt_pin_entry.setText("");
+            overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
+        }
+        if (binding.viewPagerVertical.getCurrentItem() == 3) {
+            //showQuitSignupDialog();
+            binding.viewPagerVertical.setCurrentItem(1);
             overridePendingTransition(R.anim.enter_right, R.anim.exit_left);
         }
     }

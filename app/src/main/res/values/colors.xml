@@ -2,13 +2,14 @@
 <resources>
     <color name="colorPrimary">#ffe97d</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#ff7d91</color>
+    <color name="colorAccent">#2CD7D8</color>
 
     <color name="theme_color">#ffe97d</color>
     <color name="border">#d2b10f</color>
 
     <color name="black_overlay">#66000000</color>
-    <color name="white">#ffffff</color>
+    <color name="white">#777777</color>
+    <color name="light_white">#777777</color>
     <color name="black">#000000</color>
     <color name="light_black">#b9afaf</color>
 
@@ -30,7 +31,7 @@
     <color name="dot_light_screen3">#93c6fd</color>
     <color name="dot_light_screen4">#e4b5fc</color>
     <color name="chocolate_color">#390d01</color>
-    <color name="translucent_color">#40000000</color>
+    <color name="translucent_color">#CC000000</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>
@@ -124,7 +125,7 @@
     <color name="navigation_background">#515151</color>
     <color name="textcolor_white">#ffffff</color>
     <color name="textcolor_black">#000000</color>
-    <color name="background_for_dash_header">#b7686767</color>
+    <color name="background_for_dash_header">#b7686767</color>i
     <color name="dashboard_background">#e6e6e6</color>
     <color name="textcolor_gray">#868686</color>
     <color name="hint_color">#868686</color>

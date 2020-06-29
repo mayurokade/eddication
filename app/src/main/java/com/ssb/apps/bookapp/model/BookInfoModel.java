@@ -193,15 +193,39 @@ public class BookInfoModel implements Serializable {
         @SerializedName("dt_addedon")
         @Expose
         private String dtAddedon;
+        @SerializedName("book_author_name")
+        @Expose
+        private String bookAutherName;
         @SerializedName("book_desc")
         @Expose
         private String book_desc;
         @SerializedName("HasUserPaid")
         @Expose
-        private Boolean hasUserPaid;
+        private Boolean hasUserPaid = false;
         @SerializedName("book_banner_image")
         @Expose
         private Boolean bookBannerImage;
+        @SerializedName("HasBookInCart")
+        @Expose
+        private Boolean hasBookInCart;
+
+        public String getBookAutherName() {
+            return bookAutherName;
+        }
+
+        public void setBookAutherName(String bookAutherName) {
+            this.bookAutherName = bookAutherName;
+        }
+
+        public Boolean getHasBookInCart() {
+            return hasBookInCart;
+        }
+
+        public void setHasBookInCart(Boolean hasBookInCart) {
+            this.hasBookInCart = hasBookInCart;
+        }
+
+
 
         public Boolean getBookBannerImage() {
             return bookBannerImage;

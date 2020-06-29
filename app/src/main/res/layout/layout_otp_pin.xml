@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp10"
                 android:text="@string/verify_your_account"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="27sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/roboto_regular" />
@@ -38,9 +38,11 @@
                 android:inputType="number"
                 android:maxLength="5"
                 android:textIsSelectable="true"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 app:pinLineStroke="1dp"
+                android:textColor="@color/white"
                 app:pinLineStrokeSelected="1dp"
+                app:fontFamily="@font/roboto_regular"
                 />
 
             <LinearLayout
@@ -49,10 +51,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp20"
                 android:background="@drawable/rounded_corner_unselected"
-                android:paddingLeft="@dimen/dp20"
-                android:paddingTop="@dimen/dp10"
-                android:paddingRight="@dimen/dp20"
-                android:paddingBottom="@dimen/dp10">
+                android:paddingLeft="@dimen/dp15"
+                android:paddingTop="@dimen/dp8"
+                android:paddingRight="@dimen/dp15"
+                android:paddingBottom="@dimen/dp8">
 
                 <TextView
                     android:id="@+id/tvOtpTitle"
@@ -60,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:text="Submit"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/t16sp"
                     app:fontFamily="@font/roboto_regular" />
 
@@ -72,14 +74,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:layout_margin="@dimen/dp15"
-                android:background="#c0c0c0" />
+                android:background="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/dp20"
                 android:text="@string/not_registered_yet_register_to_listen_books_with_greate_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 app:fontFamily="@font/roboto_regular" />
         </LinearLayout>
     </LinearLayout>

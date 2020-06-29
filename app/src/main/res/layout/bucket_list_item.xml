@@ -79,8 +79,9 @@
                 app:rb_click_rating="false"
                 app:rb_empty="@drawable/empty"
                 app:rb_fill="@drawable/fill"
+                android:layout_marginLeft="@dimen/dp10"
                 app:rb_max_count="5"
-                app:rb_touch_rating="true" />
+                app:rb_touch_rating="false" />
 
         </LinearLayout>
         <LinearLayout

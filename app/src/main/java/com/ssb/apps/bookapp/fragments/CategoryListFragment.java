@@ -60,6 +60,8 @@ public class CategoryListFragment extends Fragment {
         data = (CategotryResModel.CategoryDatum) getArguments().getSerializable("data");
         apiService = ApiClient.getClient().create(ApiInterface.class);
         binding.rvCategoryList.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        ((MainActivity) getActivity()).relSearch.setVisibility(View.INVISIBLE);
+        binding.tvAllCategoryName.setText(""+data.getCatName());
     }
 
     private void loadCategorylist() {

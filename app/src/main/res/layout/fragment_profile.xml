@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.FragmentProfile">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="profile"
+            type="com.ssb.apps.bookapp.model.ProfileModel.ProfileDatum" />
+
+        <variable
+            name="paneldetail"
+            type="com.ssb.apps.bookapp.model.ProfileModel.PanelDetails" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/dp10">
+
+            <TextView
+                android:id="@+id/tvEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/dp10"
+                android:text="@string/edit_profile"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/t16sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto_regular" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="@dimen/dp100"
+                    android:layout_height="@dimen/dp100"
+                    android:src="@drawable/ic_profile"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="1dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:padding="@dimen/dp5"
+                        android:text="@{profile.userName}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t16sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <TextView
+                        android:id="@+id/tv_mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:paddingLeft="@dimen/dp5"
+                        android:text="@={profile.userMobile}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp"
+                        android:visibility="@{profile.auther? View.GONE : View.VISIBLE}"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:paddingLeft="@dimen/dp5"
+                        android:text="@={profile.userEmail}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp"
+                        android:visibility="@{profile.auther? View.GONE : View.VISIBLE}"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <TextView
+                        android:id="@+id/tv_bio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:paddingLeft="@dimen/dp5"
+                        android:text="@={profile.authorBio}"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp"
+                        android:visibility="@{profile.auther? View.VISIBLE : View.GONE}"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{profile.auther? View.VISIBLE : View.GONE}">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_mic" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@color/material_gray_600"
+                android:padding="@dimen/dp10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{profile.auther? View.VISIBLE : View.GONE }">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp5"
+                        android:text="@string/books_by_me"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/dp5"
+                        android:text='@{profile.totalBookCount == null? "0" : profile.totalBookCount }'
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:background="@color/material_gray_600"
+                    android:paddingBottom="@dimen/dp10" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp5"
+                        android:text="@string/my_collection"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/dp5"
+                        android:text='@{profile.totalBookCount == null? "0" : profile.totalBookCount }'
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:background="@color/material_gray_600"
+                    android:paddingBottom="@dimen/dp10" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp5"
+                        android:text="@string/my_revenue"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/dp5"
+                        android:text='@{profile.totalBookCount == null? "0" : profile.totalBookCount }'
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{profile.auther? View.GONE : View.VISIBLE }">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp5"
+                        android:text="@string/str_myshelf"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/dp5"
+                        android:text='@{profile.bookShelfCount == null? "0" : profile.bookShelfCount }'
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:background="@color/material_gray_600"
+                    android:paddingBottom="@dimen/dp10" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp5"
+                        android:text="@string/str_mybucket"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/dp5"
+                        android:text='@{profile.bucketCount == null? "0" : profile.bucketCount }'
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@color/material_gray_600"
+                android:padding="@dimen/dp10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/dp20"
+                android:gravity="center_vertical"
+                android:visibility="@{profile.auther? View.VISIBLE : View.GONE }">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_all_rating"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/t14sp"
+                    />
+                <com.whinc.widget.ratingbar.RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="@dimen/dp100"
+                    android:layout_height="@dimen/dp25"
+                    app:rb_click_rating="false"
+                    app:rb_empty="@drawable/empty"
+                    app:rb_fill="@drawable/fill"
+                    android:layout_marginLeft="@dimen/dp10"
+                    app:rb_max_count="5"
+                    app:rb_touch_rating="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/material_gray_600"
+                android:padding="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp20"
+                android:visibility="@{profile.auther? View.VISIBLE : View.GONE }">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_admin_details"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/t18sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:text="@string/str_pannel_link"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/t16sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:text="@{paneldetail.url}"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/t16sp"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="@dimen/dp10"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:text="@string/str_user_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/t16sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:text="@{paneldetail.email}"
+                    android:textColor="@color/gray_ulternet"
+                    android:textSize="@dimen/t16sp"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnBcmWriter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/str_interest_to_be_writer"
+                android:textAllCaps="false"
+                android:visibility="@{profile.auther? View.GONE : View.VISIBLE }"
+                android:layout_margin="@dimen/dp10"
+                android:textColor="@color/black"
+                android:background="@color/colorAccent"/>
+
+        </LinearLayout>
+    </ScrollView>
+</layout>

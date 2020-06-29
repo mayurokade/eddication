@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="@dimen/dp30"
+            android:layout_height="@dimen/dp30"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/dp20"
+            android:src="@drawable/ic_close_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="@dimen/dp20"
+            android:text="@string/registraion"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp22"
+            app:fontFamily="@font/roboto_regular" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp20"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rlHeader">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please fill your regitration form to SignIn"
+            android:textSize="@dimen/t16sp"
+            android:layout_gravity="center"
+            android:padding="@dimen/dp10"
+            android:textColor="@color/white"
+            app:fontFamily="@font/roboto_regular" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginBottom="@dimen/dp50"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp10"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.15"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:src="@drawable/user"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etYourName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:inputType="text"
+                android:digits="0123456789qwertzuiopasdfghjklyxcvbnmQWERTZUIOPASDFGHJKLYXCVBNM "
+                android:background="@null"
+                android:hint="@string/your_name"
+                android:textColor="@color/white"
+                android:textColorHint="@color/material_blue_grey_200"
+                android:textSize="@dimen/t18sp"
+                app:fontFamily="@font/roboto_regular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp10"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.15"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:src="@drawable/mobileno"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etMobileNo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:enabled="false"
+                android:inputType="number"
+                android:background="@null"
+                android:textColor="@color/white"
+                android:textColorHint="@color/material_blue_grey_200"
+                android:textSize="@dimen/t18sp"
+                app:fontFamily="@font/roboto_regular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp10"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp10">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.15"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:src="@drawable/ic_email"
+                    android:tint="@color/white" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:hint="@string/your_email"
+                android:background="@null"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white"
+                android:textColorHint="@color/material_blue_grey_200"
+                android:textSize="@dimen/t18sp"
+                app:fontFamily="@font/roboto_regular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linRegi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp10"
+            android:background="@drawable/rounded_corner_selected"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                android:textSize="@dimen/t16sp"
+                android:padding="@dimen/dp10"
+                android:textColor="@color/white"
+                app:fontFamily="@font/roboto_regular" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

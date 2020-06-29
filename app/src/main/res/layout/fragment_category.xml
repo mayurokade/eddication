@@ -9,58 +9,40 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <AutoCompleteTextView
-                android:id="@+id/search_box"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_search_"
-                android:dropDownWidth="wrap_content"
-                android:dropDownVerticalOffset="5dp"
-                android:inputType="textAutoComplete|textAutoCorrect"
-                android:popupBackground="@color/white"
-                android:textColor="#000"/>
-
-        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/dp5">
+            android:paddingLeft="@dimen/dp10">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/categories"
-                android:textColor="@color/black"
-                android:textSize="@dimen/t16sp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t18sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/roboto_regular" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="2dp"
-                android:background="@color/red" />
-        </LinearLayout>
 
+
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/dp15"
-            android:background="#c0c0c0" />
+            android:background="#c0c0c0"
+            android:layout_margin="@dimen/dp10"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             />
-
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginRight="@dimen/dp10"
+            />
 
     </LinearLayout>
 </layout>

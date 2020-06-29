@@ -23,7 +23,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import static com.ssb.apps.bookapp.fragments.FragmentBookDetails.binding;
+import static com.ssb.apps.bookapp.fragments.FragmentBookDetails.*;
 import static com.ssb.apps.bookapp.fragments.FragmentBookDetails.mediaPlayer;
 import static com.ssb.apps.bookapp.fragments.FragmentBookDetails.millinsecondsToTimer;
 import static com.ssb.apps.bookapp.fragments.FragmentBookDetails.updateSeekBar;
@@ -36,14 +36,17 @@ public class BooKListAudioAdapter extends RecyclerView.Adapter<BooKListAudioAdap
     List<BookInfoModel.ChapterDatum> list;
     String path = "";
     OnItemClick onItemClick;
+    boolean hasUserPaid;
     int pos = -1;
     private boolean initialStage = true;
 
 
-    public BooKListAudioAdapter(FragmentActivity activity, List<BookInfoModel.ChapterDatum> chapterData, String chapterAudioPath) {
+
+    public BooKListAudioAdapter(Context activity, List<BookInfoModel.ChapterDatum> chapterData, String chapterAudioPath, Boolean hasUserPaid) {
         this.mcontext = activity;
         this.list = chapterData;
         this.path = chapterAudioPath;
+        this.hasUserPaid = hasUserPaid;
     }
 
     @NonNull
@@ -58,32 +61,66 @@ public class BooKListAudioAdapter extends RecyclerView.Adapter<BooKListAudioAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.itemBookAudioBinding.chapter.setText(list.get(position).getChapterName());
-        if (list.get(position).isStart())
-            holder.itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.ic_played);
-        else
-            holder.itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.ic_pause);
+        if (list.size() > 0) {
+            holder.itemBookAudioBinding.setAudio(list.get(position));
+            holder.itemBookAudioBinding.chapter.setText(list.get(position).getChapterName());
+            holder.itemBookAudioBinding.chapterName.setText("Chapter " + (position + 1));
+            Log.e(TAG, "onBindViewHolder: status "+hasUserPaid );
 
-        holder.itemBookAudioBinding.ivButton.setOnClickListener(v -> {
-            if (IOUtils.isConnected(mcontext)){
-                if (list.get(position).isStart()) {
-                    holder.itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.ic_pause);
-                    list.get(position).setStart(false);
-                    notifyDataSetChanged();
-                    onItemClick.approve(list.get(position), position, false);
-                    playAudio(list.get(position).isStart(), position);
-                } else {
-                    holder.itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.ic_played);
-                    setNonEditableOthers(position);
-                    onItemClick.approve(list.get(position), position, true);
-                    notifyDataSetChanged();
-                    playAudio(list.get(position).isStart(), position);
+            if (!hasUserPaid)
+                holder.itemBookAudioBinding.tvChapPaidStatus.setText(list.get(position).getChapterPayStatus().equalsIgnoreCase("free") ? "Free" : "");
+
+            if (list.get(position).isStart())
+                holder.itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.play);
+            else
+                holder.itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.pause);
+
+            holder.itemBookAudioBinding.ivButton.setOnClickListener(v -> {
+                if (hasUserPaid) {
+                    if (IOUtils.isConnected(mcontext)) {
+                        playOrPause(holder.itemBookAudioBinding,list.get(position),position);
+                       /* if (list.get(position).isStart()) {
+                            holder.itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.ic_pause);
+                            list.get(position).setStart(false);
+                            notifyDataSetChanged();
+                            onItemClick.approve(list.get(position), position, false);
+                            playAudio(list.get(position).isStart(), position);
+                        } else {
+                            holder.itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.ic_played);
+                            setNonEditableOthers(position);
+                            onItemClick.approve(list.get(position), position, true);
+                            notifyDataSetChanged();
+                            playAudio(list.get(position).isStart(), position);
+                        }*/
+                    } else {
+                        IOUtils.errorShowSnackBar((Activity) mcontext, mcontext.getString(R.string.msg_internet_connection));
+                    }
+                }else if(list.get(position).getChapterPayStatus().equalsIgnoreCase("free")){
+                    playOrPause(holder.itemBookAudioBinding,list.get(position),position);
+                }else{
+                    onItemClick.paymentpaid(list.get(position),position,list.get(position).isStart());
                 }
-            }else{
-                IOUtils.errorShowSnackBar((Activity) mcontext,mcontext.getString(R.string.msg_internet_connection));
-            }
 
-        });
+            });
+
+        }
+    }
+
+    private void playOrPause(ItemBookAudioBinding itemBookAudioBinding, BookInfoModel.ChapterDatum datum, int position) {
+        if (datum.isStart()) {
+            itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.pause);
+            datum.setStart(false);
+            notifyDataSetChanged();
+            onItemClick.approve(datum, position, false);
+            playAudio(list.get(position).isStart(), position);
+        } else {
+            itemBookAudioBinding.ivButton.setBackgroundResource(R.drawable.play);
+            setNonEditableOthers(position);
+            onItemClick.approve(list.get(position), position, true);
+            notifyDataSetChanged();
+            playAudio(list.get(position).isStart(), position);
+        }
+        lastPosition = position;
     }
 
 
@@ -116,41 +153,42 @@ public class BooKListAudioAdapter extends RecyclerView.Adapter<BooKListAudioAdap
 
     public interface OnItemClick {
         void approve(BookInfoModel.ChapterDatum data, int position, boolean isPlayed);
+        void paymentpaid(BookInfoModel.ChapterDatum data, int position, boolean isPlayed);
     }
 
     private void playAudio(boolean start, int position) {
-        Log.e(TAG, "playAudio: state "+start );
+        Log.e(TAG, "playAudio: state " + start);
         if (start) {
 
-                String url = BookApp.cache.readString(mcontext, Constant.URL, "") + path + "/"
-                        + list.get(position).getChapterFile();
-                Log.e(TAG, "approve: url " + url);
-                try {
-                    //  if()
-                    if (pos != position) {
-                        if(mediaPlayer.isPlaying()){
-                            mediaPlayer.stop();
-                            mediaPlayer.reset();
-                            mediaPlayer.release();
-                            mediaPlayer = null;
-                            binding.ivMusicBtn.setImageResource(R.drawable.ic_pause);
-                        }
-                        mediaPlayer = new MediaPlayer();
-                        mediaPlayer.setLooping(true);
-                        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                        new Player().execute(url);
-                        Log.e(TAG, "playAudio: inside ");
-                        pos = position;
-
-                    }else {
-                        binding.tvTotalTime.setText(millinsecondsToTimer(mediaPlayer.getDuration()));
-                        mediaPlayer.start();
-                        updateSeekBar();
-                        binding.ivMusicBtn.setImageResource(R.drawable.ic_played);
+            String url = BookApp.cache.readString(mcontext, Constant.URL, "") + path + "/"
+                    + list.get(position).getChapterFile();
+            Log.e(TAG, "approve: url " + url);
+            try {
+                //  if()
+                if (pos != position) {
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop();
+                        mediaPlayer.reset();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                        binding.ivMusicBtn.setImageResource(R.drawable.ic_pause);
                     }
-                } catch (Exception ex){
-                    ex.printStackTrace();
+                    mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setLooping(true);
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    new Player().execute(url);
+                    Log.e(TAG, "playAudio: inside ");
+                    pos = position;
+
+                } else {
+                    binding.tvTotalTime.setText(millinsecondsToTimer(mediaPlayer.getDuration()));
+                    mediaPlayer.start();
+                    updateSeekBar();
+                    binding.ivMusicBtn.setImageResource(R.drawable.ic_played);
                 }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
 
         } else {
@@ -180,7 +218,8 @@ public class BooKListAudioAdapter extends RecyclerView.Adapter<BooKListAudioAdap
                 prepared = true;
 
             } catch (Exception e) {
-                Log.e("MyAudioStreamingApp", e.getMessage());
+                //Log.e("MyAudioStreamingApp", e.getMessage());
+                e.printStackTrace();
                 prepared = false;
             }
 

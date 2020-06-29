@@ -6,15 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.activities.MainActivity;
-import com.ssb.apps.bookapp.apps.BookApp;
 import com.ssb.apps.bookapp.databinding.ItemBookListBinding;
-import com.ssb.apps.bookapp.fragments.FragmentBookDetails;
 import com.ssb.apps.bookapp.fragments.FragmentBookInfo;
 import com.ssb.apps.bookapp.model.DashboardResModel;
-import com.ssb.apps.bookapp.utils.Constant;
 import com.ssb.apps.bookapp.utils.IOUtils;
 
 import java.util.List;
@@ -53,7 +49,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         if(list.size()>0){
             holder.itemBookListBinding.setBookDetails(list.get(position));
-            IOUtils.loadImage(mcontext,holder.itemBookListBinding.itemImage, imagePath+"/"+list.get(position).getBookCoverImage());
+            IOUtils.loadImage(mcontext,holder.itemBookListBinding.itemImage, imagePath+"/"+list.get(position).getBookCoverImage(), R.drawable.default_thumb);
         }
     }
 

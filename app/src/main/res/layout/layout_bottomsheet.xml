@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <!--<RelativeLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.michaldrabik.tapbarmenulib.TapBarMenu
+            android:id="@+id/tapBarMenu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp45"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/dp20"
+            android:layout_alignParentBottom="true"
+            app:tbm_menuAnchor="bottom"
+            app:tbm_buttonSize="@dimen/dp45"
+            app:tbm_iconClosed="@drawable/pause"
+            >
+
+            <ImageView
+                android:id="@+id/item1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/ic_bucket"
+                tools:visibility="visible"
+                />
+
+            <ImageView
+                android:id="@+id/item2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/ic_delete"
+                />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:id="@+id/item3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/ic_pause"
+                />
+
+            <ImageView
+                android:id="@+id/item4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/played"
+                />
+
+        </com.michaldrabik.tapbarmenulib.TapBarMenu>
+
+    </RelativeLayout>-->
+
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+        android:elevation="@dimen/dp10"
+        android:gravity="center"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dp8">
+
+           <ImageView
+               android:padding="@dimen/dp10"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp100"
+               android:src="@drawable/background"
+               android:scaleType="fitXY"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

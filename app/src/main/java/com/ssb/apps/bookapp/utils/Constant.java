@@ -12,6 +12,9 @@ public class Constant {
     public static final String MOBILE ="mobile" ;
     public static final String TOKEN ="token" ;
     public static final String ISLOGIN = "isLogin";
+    public static final String EMAIL ="email" ;
+    public static final String ISLOGINFB = "fblogin";
+    public static final String ISAUHTHER = "isAuther";
     public static String URL;
 
     public static String SESSION_USER_SALT = "session_user_salt";

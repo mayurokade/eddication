@@ -3,13 +3,11 @@ package com.ssb.apps.bookapp.adapter;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.activities.MainActivity;
 import com.ssb.apps.bookapp.databinding.ItemCategoryListBinding;
-import com.ssb.apps.bookapp.fragments.FragmentBookDetails;
 import com.ssb.apps.bookapp.fragments.FragmentBookInfo;
 import com.ssb.apps.bookapp.model.DashboardResModel;
 import com.ssb.apps.bookapp.utils.IOUtils;
@@ -49,7 +47,7 @@ public class CategoryListDetialAdapter extends RecyclerView.Adapter<CategoryList
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         if(list.size()>0){
             holder.itemCategoryListBinding.setBookDetails(list.get(position));
-            IOUtils.loadImage(mcontext,holder.itemCategoryListBinding.itemImage, imagePath+"/"+list.get(position).getBookCoverImage());
+            IOUtils.loadImage(mcontext,holder.itemCategoryListBinding.itemImage, imagePath+"/"+list.get(position).getBookCoverImage(), R.drawable.default_thumb);
 
             holder.itemCategoryListBinding.ratingBar.setCount(list.get(position).getTotalRatings() == null? 0:Integer.parseInt(list.get(position).getTotalRatings()));
         }

@@ -13,24 +13,26 @@
             type="String" />
     </data>
 
-    <androidx.cardview.widget.CardView
+   <!-- <androidx.cardview.widget.CardView
         android:layout_width="@dimen/dp130"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:cardCornerRadius="5dp"
-        app:cardUseCompatPadding="true">
+        app:cardUseCompatPadding="true"
+        >-->
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dp100"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="@dimen/dp5"
+            >
 
             <ImageView
                 android:id="@+id/itemImage"
-                android:layout_width="@dimen/dp120"
-                android:layout_height="@dimen/dp100"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp120"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitXY"
                 android:src="@drawable/coverpaeg" />
@@ -41,8 +43,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{bookDetails.bookName}"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/t14sp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/t16sp"
+                android:textStyle="bold"
+                android:ellipsize="end"
                 android:maxLines="1"
                 app:fontFamily="@font/roboto_regular" />
 
@@ -50,14 +54,13 @@
                 android:id="@+id/tvAuthName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp5"
-                android:text="@{bookDetails.autherName}"
-                android:textColor="@android:color/black"
+                android:text="@{`By `+bookDetails.autherName}"
+                android:textColor="@color/white"
                 android:textSize="@dimen/t14sp"
                 android:maxLines="1"
                 app:fontFamily="@font/roboto_regular" />
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+   <!-- </androidx.cardview.widget.CardView>-->
 </layout>

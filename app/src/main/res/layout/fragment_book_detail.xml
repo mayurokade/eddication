@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="book"
+            type="com.ssb.apps.bookapp.model.BookInfoModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,92 +35,135 @@
                         android:layout_height="@dimen/dp150"
                         android:alpha="0.4"
                         android:scaleType="fitXY"
-                        android:src="@drawable/coverpaeg" />
-
-                    <TextView
-                        android:id="@+id/tvBookName"
+                        android:src="@drawable/default_thumb_book_detail" />
+                    <!---->
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp5"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp16"
-                        app:fontFamily="@font/roboto_regular" />
+                        android:layout_height="@dimen/dp150"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="bottom"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvAutherName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvBookName"
-                        android:layout_marginLeft="@dimen/dp5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp14"
-                        app:fontFamily="@font/roboto_regular" />
+                        <TextView
+                            android:id="@+id/tvBookName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp5"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp16"
+                            app:fontFamily="@font/roboto_regular" />
 
-                    <TextView
-                        android:id="@+id/tvCategory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvAutherName"
-                        android:layout_marginLeft="@dimen/dp5"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp14"
-                        app:fontFamily="@font/roboto_regular" />
+                        <TextView
+                            android:id="@+id/tvAutherName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvBookName"
+                            android:layout_marginLeft="@dimen/dp5"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp14"
+                            app:fontFamily="@font/roboto_regular" />
 
-                    <com.whinc.widget.ratingbar.RatingBar
-                        android:id="@+id/ratingBar"
-                        android:layout_width="@dimen/dp100"
-                        android:layout_height="@dimen/dp30"
-                        android:layout_below="@+id/tvCategory"
-                        app:rb_click_rating="false"
-                        app:rb_empty="@drawable/empty"
-                        app:rb_fill="@drawable/fill"
-                        app:rb_max_count="5"
-                        app:rb_touch_rating="true" />
+                        <TextView
+                            android:id="@+id/tvCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvAutherName"
+                            android:layout_marginLeft="@dimen/dp5"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp14"
+                            app:fontFamily="@font/roboto_regular" />
+
+                        <!--<TextView
+                            android:id="@+id/tvOurPriceTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvAutherName"
+                            android:text="@string/str_price"
+                            android:layout_marginLeft="@dimen/dp5"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp14"
+                            app:fontFamily="@font/roboto_regular" />-->
+
+                        <TextView
+                            android:id="@+id/tvOurPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvAutherName"
+                            android:layout_marginLeft="@dimen/dp5"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp16"
+                            android:layout_marginBottom="@dimen/dp10"
+                            app:fontFamily="@font/roboto_regular" />
+
+
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_centerInParent="true"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true">
-
-                        <ImageView
-                            android:id="@+id/ivShare"
-                            android:layout_width="@dimen/dp35"
-                            android:layout_height="@dimen/dp35"
-                            android:src="@drawable/ic_share"
-                            android:scaleType="fitXY"
-                            android:layout_marginRight="@dimen/dp5"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerInParent="true"/>
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:gravity="end">
 
                         <ImageView
                             android:id="@+id/ivBucket"
-                            android:layout_width="@dimen/dp35"
-                            android:layout_height="@dimen/dp35"
-                            android:src="@drawable/ic_bucket"
+                            android:layout_width="@dimen/dp30"
+                            android:layout_height="@dimen/dp30"
+                            android:layout_marginRight="@dimen/dp5"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/like_deactive" />
+
+                        <ImageView
+                            android:id="@+id/ivShare"
+                            android:layout_width="@dimen/dp30"
+                            android:layout_height="@dimen/dp30"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginRight="@dimen/dp5"
+                            android:layout_marginTop="@dimen/dp10"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_share" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:text="@string/play_summary"
+                                android:textColor="@color/white"
+                                android:layout_marginRight="@dimen/dp10"
+                                android:textSize="@dimen/sp16"
+                                app:fontFamily="@font/roboto_regular" />
+                        <ImageView
+                            android:id="@+id/ivMusicBtn"
+                            android:layout_width="@dimen/dp30"
+                            android:layout_height="@dimen/dp30"
+                            android:src="@drawable/ic_pause"
                             android:scaleType="fitXY"
                             android:layout_marginTop="@dimen/dp10"
-                            android:layout_marginRight="@dimen/dp5"
-                            />
+                            android:layout_marginRight="@dimen/dp5"/>
+                        </LinearLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linSeek"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp30"
                         android:layout_below="@+id/ivBanner"
                         android:background="@color/material_blue_gray_900"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:visibility="gone">
 
-                        <ImageView
-                            android:id="@+id/ivMusicBtn"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/dp30"
-                            android:layout_weight="0.2"
-                            android:src="@drawable/ic_pause" />
+
 
                         <TextView
                             android:id="@+id/tvCompleted"
@@ -149,7 +199,6 @@
                 </RelativeLayout>
 
 
-
                 <LinearLayout
                     android:id="@+id/llPrise"
                     android:layout_width="wrap_content"
@@ -158,7 +207,8 @@
                     android:layout_marginTop="@dimen/dp20"
                     android:layout_marginRight="@dimen/dp5"
                     android:background="@color/banner_color"
-                    android:padding="@dimen/dp5">
+                    android:padding="@dimen/dp5"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tvPrise"
@@ -166,8 +216,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvBookName"
                         android:background="@color/banner_color"
-                        android:paddingRight="@dimen/dp5"
                         android:paddingLeft="@dimen/dp10"
+                        android:paddingRight="@dimen/dp5"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp14"
 
@@ -177,10 +227,37 @@
 
             </RelativeLayout>
 
+            <com.whinc.widget.ratingbar.RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="@dimen/dp100"
+                android:layout_height="@dimen/dp30"
+                android:layout_below="@+id/tvCategory"
+                android:layout_gravity="end"
+                app:rb_click_rating="false"
+                app:rb_empty="@drawable/empty"
+                app:rb_fill="@drawable/fill"
+                app:rb_max_count="5"
+                app:rb_touch_rating="false" />
+
+            <TextView
+                android:id="@+id/chapter_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp15"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/t16sp"
+                app:fontFamily="@font/roboto_regular" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list_audio"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp5"
+                android:paddingLeft="@dimen/dp5" />
         </LinearLayout>
     </ScrollView>
 </layout>

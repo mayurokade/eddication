@@ -4,6 +4,7 @@ import com.ssb.apps.bookapp.model.BookInfoModel;
 import com.ssb.apps.bookapp.model.BucketModel;
 import com.ssb.apps.bookapp.model.CategotryResModel;
 import com.ssb.apps.bookapp.model.DashboardResModel;
+import com.ssb.apps.bookapp.model.ProfileModel;
 import com.ssb.apps.bookapp.model.ReviewModel;
 import com.ssb.apps.bookapp.model.RoutModel;
 import com.ssb.apps.bookapp.model.SearchResModel;
@@ -31,6 +32,13 @@ public interface ApiInterface {
     @POST("/app_otpverify")
     Call<UserDetailsModel> getUserDetails(@Field("mobile") String mobile,
                                           @Field("otp") String otp,
+                                          @Field("deviceId") String deviceId);
+
+    @FormUrlEncoded
+    @POST("/app_auth_email")
+    Call<UserDetailsModel> loginWithFb(@Field("email") String email,
+                                          @Field("name") String name,
+                                          @Field("appType") String appType,
                                           @Field("deviceId") String deviceId);
 
     @POST("/app_dashboard")
@@ -96,5 +104,32 @@ public interface ApiInterface {
                                                   @Field("bookId") String bookId,
                                                   @Field("cartId") String cartId);
 
+    @FormUrlEncoded
+    @POST("/app_register")
+    Call<StatusModel> regstrationCall(@Field("name") String name,
+                                          @Field("mobile") String mobile,
+                                          @Field("email") String email,
+                                          @Field("appType") String appType);
 
+    @FormUrlEncoded
+    @POST("/app_author_register")
+    Call<StatusModel> writerRegister(@Header("secId") String secId,
+                                     @Header("secToken") String secToken,
+                                     @Header("request") String request,
+                                     @Field("email") String email,
+                                     @Field("password") String password,
+                                     @Field("bio") String bio);
+
+    @FormUrlEncoded
+    @POST("/app_purchase_book")
+    Call<StatusModel> callPurchaseAPI(@Header("secId") String secId,
+                                      @Header("secToken") String secToken,
+                                      @Header("request") String request,
+                                      @Field("bId") String bId,
+                                      @Field("tranId") String tranId);
+
+    @POST("/app_profile")
+    Call<ProfileModel> getUserProfile(@Header("secId") String secId,
+                                      @Header("secToken") String secToken,
+                                      @Header("request") String request);
 }

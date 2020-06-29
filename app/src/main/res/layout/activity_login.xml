@@ -26,10 +26,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp10"
                 android:text="@string/login"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="27sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/roboto_regular" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/login_logo"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,13 +54,14 @@
                     <ImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
-                        android:src="@drawable/ic_phone" />
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/white"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="fill_parent"
-                    android:background="@color/border"
+                    android:background="@color/white"
                     android:padding="@dimen/dp1" />
 
                 <TextView
@@ -65,7 +71,7 @@
                     android:layout_weight="0.8"
                     android:paddingLeft="@dimen/dp20"
                     android:text="@string/login_with_number"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
 
                     android:textSize="@dimen/t18sp"
                     app:fontFamily="@font/roboto_regular" />
@@ -99,13 +105,14 @@
                     <ImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
-                        android:src="@drawable/ic_fb" />
+                        android:src="@drawable/ic_fb"
+                        android:tint="@color/white"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="fill_parent"
-                    android:background="@color/border"
+                    android:background="@color/white"
                     android:padding="@dimen/dp1" />
 
                 <TextView
@@ -114,8 +121,7 @@
                     android:layout_weight="0.8"
                     android:paddingLeft="@dimen/dp20"
                     android:text="@string/login_with_facbook"
-
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/t18sp"
                     app:fontFamily="@font/roboto_regular" />
             </LinearLayout>
@@ -124,14 +130,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:layout_margin="@dimen/dp15"
-                android:background="#c0c0c0" />
+                android:background="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/dp20"
                 android:text="@string/not_registered_yet_register_to_listen_books_with_greate_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 app:fontFamily="@font/roboto_regular" />
         </LinearLayout>
     </LinearLayout>

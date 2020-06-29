@@ -3,10 +3,10 @@ package com.ssb.apps.bookapp.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
 
 
 import com.ssb.apps.bookapp.R;
-import com.ssb.apps.bookapp.views.RobotoTextView;
 
 
 
@@ -15,8 +15,8 @@ public class DialogAlertUtils {
     private Context mContext;
     private Dialog mDialog;
 
-    private RobotoTextView mDialogYesButton;
-    private RobotoTextView mDialogNoButton;
+    private TextView mDialogYesButton;
+    private TextView mDialogNoButton;
     private OnAlertDialogClickListener onAlertDialogBtnClick;
 
     public DialogAlertUtils(Context context) {
@@ -24,7 +24,7 @@ public class DialogAlertUtils {
     }
 
     public void showDialog(String title, String msg) {
-        RobotoTextView mDialogText, mDialogTitle;
+        TextView mDialogText, mDialogTitle;
         if (mDialog == null) {
             mDialog = new Dialog(mContext, R.style.CustomDialogTheme);
         }

@@ -2,10 +2,14 @@ package com.ssb.apps.bookapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -33,6 +37,11 @@ public class ActivitySplash extends AppCompatActivity {
         //setContentView(R.layout.activity_splash);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = this.getWindow();
+            window.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        }*/
 
 // start the animation
         Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_slide_in_left);

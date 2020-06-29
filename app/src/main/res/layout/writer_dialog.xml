@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/black"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_as_wr"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/t16sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp50"
+            app:fontFamily="@font/roboto_regular" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="@dimen/dp50"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="@dimen/dp10"
+            android:hint="@string/enter_email"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            android:background="@drawable/corner_backgound"
+            android:textSize="@dimen/t16sp"
+            app:fontFamily="@font/roboto_regular" />
+
+        <EditText
+            android:id="@+id/etBio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="@dimen/dp10"
+            android:hint="@string/enter_your_biography"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            android:background="@drawable/corner_backgound"
+            android:textSize="@dimen/t16sp"
+            app:fontFamily="@font/roboto_regular"
+            android:lines="10"
+            android:minLines="5"
+            android:gravity="top|left"
+            android:maxLines="15"/>
+
+        <!--<EditText
+   android:id="@+id/editText1"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:lines="10"
+   android:minLines="5"
+   android:gravity="top|left"
+   android:maxLines="15" />-->
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="@dimen/dp10"
+            android:maxLines="1"
+            android:hint="@string/enter_password"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            android:background="@drawable/corner_backgound"
+            android:textSize="@dimen/t16sp"
+            app:fontFamily="@font/roboto_regular" />
+
+        <EditText
+            android:id="@+id/etConfPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="@dimen/dp10"
+            android:maxLines="1"
+            android:hint="@string/confirm_password"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            android:background="@drawable/corner_backgound"
+            android:textSize="@dimen/t16sp"
+            app:fontFamily="@font/roboto_regular" />
+
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp50"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="@dimen/dp10"
+            android:maxLines="1"
+            android:text="@string/register"
+            android:textColor="@color/black"
+            android:background="@color/colorAccent"
+            android:textSize="@dimen/t16sp"
+            app:fontFamily="@font/roboto_regular"
+            />
+    </LinearLayout>
+</layout>

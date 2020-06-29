@@ -78,6 +78,7 @@
     <dimen name="sp30">30sp</dimen>
     <dimen name="sp40">40sp</dimen>
     <dimen name="sp25">25sp</dimen>
+    <dimen name="sp22">22sp</dimen>
 
 
 </resources>

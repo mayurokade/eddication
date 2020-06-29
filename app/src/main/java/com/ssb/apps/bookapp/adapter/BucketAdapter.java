@@ -47,7 +47,7 @@ public class BucketAdapter extends RecyclerView.Adapter<BucketAdapter.MyViewHold
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         if (list.size() > 0) {
             holder.bucketListItemBinding.setBucketData(list.get(position));
-            IOUtils.loadImage(mcontext, holder.bucketListItemBinding.ivBanner, imagePath + "/" + list.get(position).getBookCoverImage());
+            IOUtils.loadImage(mcontext, holder.bucketListItemBinding.ivBanner, imagePath + "/" + list.get(position).getBookCoverImage(), R.drawable.default_thumb);
             holder.bucketListItemBinding.ratingBar.setCount(list.get(position).getAvgRating() == null ? 0 : Integer.parseInt(list.get(position).getAvgRating()));
         }
     }

@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{data.commentUserName}"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/t14sp"
                     app:fontFamily="@font/roboto_regular"/>
                 <com.whinc.widget.ratingbar.RatingBar
@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:text="@{data.commentDesc}"
             android:textSize="@dimen/t14sp"
+            android:textColor="@color/white"
             app:fontFamily="@font/roboto_regular"/>
 
         <View

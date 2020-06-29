@@ -4,38 +4,42 @@
     tools:showIn="nav_view">
 
 
-
     <item
         android:id="@+id/menu_dashboard"
 
-        android:title="@string/menu_dashboard"/>
+        android:title="@string/menu_dashboard" />
     <!--android:icon="@drawable/ic_dashboard"-->
-    <item
-        android:id="@+id/menu_calendar"
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_profile"
+            android:title="@string/menu_profile" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_ic_bucket"
+            android:iconTint="@color/colorPrimary"
+            android:title="@string/str_bucket" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_helpus"
 
-        android:title="@string/menu_profile" />
+            android:iconTint="@color/colorPrimary"
+            android:title="@string/menu_helpus" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_aboutus"
+            android:iconTint="@color/colorPrimary"
+            android:title="@string/menu_aboutus" />
+    </group>
+    <!--android:icon="@drawable/settings"-->
 
-    <item
-        android:id="@+id/menu_ic_bucket"
-
-        android:iconTint="@color/colorPrimary"
-        android:title="@string/str_bucket" />
-
-    <item
-        android:id="@+id/menu_helpus"
-
-        android:iconTint="@color/colorPrimary"
-        android:title="@string/menu_helpus" />
-    <item
-        android:id="@+id/menu_aboutus"
-
-        android:iconTint="@color/colorPrimary"
-        android:title="@string/menu_aboutus" />
-<!--android:icon="@drawable/settings"-->
-    <item
-        android:id="@+id/menu_ic_logout"
-
-        android:iconTint="@color/colorPrimary"
-        android:title="@string/str_logout" />
-<!--android:icon="@drawable/ic_logout"-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_ic_logout"
+            android:iconTint="@color/colorPrimary"
+            android:title="@string/str_logout" />
+    </group>
+    <!--android:icon="@drawable/ic_logout"-->
 </menu>

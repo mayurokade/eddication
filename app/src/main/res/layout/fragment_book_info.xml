@@ -48,94 +48,135 @@
                             android:layout_height="@dimen/dp150"
                             android:alpha="0.4"
                             android:scaleType="fitXY"
-                            android:src="@drawable/coverpaeg" />
-
-                        <TextView
-                            android:id="@+id/tvBookName"
+                            android:src="@drawable/default_thumb_book_detail" />
+                        <!---->
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp5"
-                            android:layout_marginTop="@dimen/dp10"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp16"
-                            app:fontFamily="@font/roboto_regular" />
+                            android:layout_height="@dimen/dp150"
+                            android:layout_alignParentLeft="true"
+                            android:gravity="bottom"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvAutherName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvBookName"
-                            android:layout_marginLeft="@dimen/dp5"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp14"
-                            app:fontFamily="@font/roboto_regular" />
+                            <TextView
+                                android:id="@+id/tvBookName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp16"
+                                app:fontFamily="@font/roboto_regular" />
 
-                        <TextView
-                            android:id="@+id/tvCategory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvAutherName"
-                            android:layout_marginLeft="@dimen/dp5"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp14"
-                            app:fontFamily="@font/roboto_regular" />
+                            <TextView
+                                android:id="@+id/tvAutherName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvBookName"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp14"
+                                app:fontFamily="@font/roboto_regular" />
 
-                        <com.whinc.widget.ratingbar.RatingBar
-                            android:id="@+id/ratingBar"
-                            android:layout_width="@dimen/dp100"
-                            android:layout_height="@dimen/dp30"
-                            android:layout_below="@+id/tvCategory"
-                            android:isScrollContainer="false"
-                            android:scrollbarAlwaysDrawHorizontalTrack="false"
-                            android:longClickable="false"
-                            app:rb_click_rating="false"
-                            app:rb_empty="@drawable/empty"
-                            app:rb_fill="@drawable/fill"
-                            app:rb_max_count="5"
-                            app:rb_touch_rating="true" />
+                            <TextView
+                                android:id="@+id/tvCategory"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvAutherName"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp14"
+                                app:fontFamily="@font/roboto_regular" />
+
+                            <!--<TextView
+                                android:id="@+id/tvOurPriceTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvAutherName"
+                                android:text="@string/str_price"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp14"
+                                app:fontFamily="@font/roboto_regular" />-->
+
+                            <TextView
+                                android:id="@+id/tvOurPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvAutherName"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/sp16"
+                                android:layout_marginBottom="@dimen/dp10"
+                                app:fontFamily="@font/roboto_regular" />
+
+
+                        </LinearLayout>
+
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true">
+                            android:orientation="vertical"
+                            android:gravity="end"
+                            >
 
-                        <ImageView
-                            android:id="@+id/ivShare"
-                            android:layout_width="@dimen/dp35"
-                            android:layout_height="@dimen/dp35"
-                            android:src="@drawable/ic_share"
-                            android:scaleType="fitXY"
-                            android:layout_marginRight="@dimen/dp5"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerInParent="true"/>
+                            <ImageView
+                                android:id="@+id/ivBucket"
+                                android:layout_width="@dimen/dp30"
+                                android:layout_height="@dimen/dp30"
+                                android:layout_marginRight="@dimen/dp5"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/like_deactive" />
 
-                        <ImageView
-                            android:id="@+id/ivBucket"
-                            android:layout_width="@dimen/dp35"
-                            android:layout_height="@dimen/dp35"
-                            android:src="@drawable/ic_bucket"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/dp10"
-                            android:layout_marginRight="@dimen/dp5"
-                            />
+                            <ImageView
+                                android:id="@+id/ivShare"
+                                android:layout_width="@dimen/dp30"
+                                android:layout_height="@dimen/dp30"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerInParent="true"
+                                android:layout_marginRight="@dimen/dp5"
+                                android:layout_marginTop="@dimen/dp10"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_share" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/dp5"
+                                    android:layout_marginTop="@dimen/dp10"
+                                    android:text="@string/play_summary"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    android:layout_marginRight="@dimen/dp10"
+                                    android:textSize="@dimen/sp16"
+                                    app:fontFamily="@font/roboto_regular" />
+                                <ImageView
+                                    android:id="@+id/ivMusicBtn"
+                                    android:layout_width="@dimen/dp30"
+                                    android:layout_height="@dimen/dp30"
+                                    android:src="@drawable/ic_pause"
+                                    android:scaleType="fitXY"
+                                    android:layout_marginTop="@dimen/dp10"
+                                    android:layout_marginRight="@dimen/dp5"/>
+                            </LinearLayout>
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:id="@+id/linSeek"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/dp30"
                             android:layout_below="@+id/ivBanner"
                             android:background="@color/material_blue_gray_900"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:visibility="gone">
 
-                            <ImageView
-                                android:id="@+id/ivMusicBtn"
-                                android:layout_width="0dp"
-                                android:layout_height="@dimen/dp30"
-                                android:layout_weight="0.2"
-                                android:src="@drawable/ic_pause" />
 
 
                             <TextView
@@ -145,46 +186,29 @@
                                 android:layout_weight="0.2"
                                 android:gravity="center_vertical"
                                 android:text="0.00"
-
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/sp14"
                                 app:fontFamily="@font/roboto_regular" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:layout_weight="0.6"
-                                android:text="Play Summary"
-                                android:textAlignment="textEnd"
-                                android:textColor="@color/material_yellow_200"
-                                android:textSize="@dimen/sp14"
-                                app:fontFamily="@font/roboto_regular"
-                                />
 
                             <SeekBar
                                 android:id="@+id/seekBar"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.8"
+                                android:layout_weight="1"
                                 android:theme="@style/SeekBarColor" />
 
                             <TextView
                                 android:id="@+id/tvTotalTime"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="0.3"
-                                android:visibility="gone"
+                                android:layout_weight="0.2"
                                 android:gravity="center_vertical"
                                 android:text="0.00"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/sp14"
                                 app:fontFamily="@font/roboto_regular" />
 
-
                         </LinearLayout>
-
-
 
                     </RelativeLayout>
 
@@ -197,7 +221,8 @@
                         android:layout_marginTop="@dimen/dp20"
                         android:layout_marginRight="@dimen/dp5"
                         android:background="@color/banner_color"
-                        android:padding="@dimen/dp5">
+                        android:padding="@dimen/dp5"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/tvPrise"
@@ -222,6 +247,22 @@
                     android:orientation="vertical"
                     android:padding="@dimen/dp10">
 
+                    <com.whinc.widget.ratingbar.RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="@dimen/dp100"
+                        android:layout_height="@dimen/dp30"
+                        android:layout_below="@+id/tvCategory"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:isScrollContainer="false"
+                        android:longClickable="false"
+                        android:scrollbarAlwaysDrawHorizontalTrack="false"
+                        app:rb_click_rating="false"
+                        app:rb_empty="@drawable/empty"
+                        app:rb_fill="@drawable/fill"
+                        app:rb_max_count="5"
+                        app:rb_touch_rating="false" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -232,7 +273,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_centerInParent="true"
                             android:text="@string/about_auther"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/t14sp"
                             app:fontFamily="@font/roboto_regular" />
 
@@ -241,10 +282,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:background="@drawable/rounded_corner_selected"
+                            android:background="@drawable/corner_background_lay"
+                            android:backgroundTint="@color/red"
                             android:padding="@dimen/dp5"
                             android:text="View All Capter"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/t14sp"
                             app:fontFamily="@font/roboto_regular" />
                     </RelativeLayout>
@@ -259,7 +301,8 @@
                             android:layout_width="@dimen/dp30"
                             android:layout_height="@dimen/dp30"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_profile" />
+                            android:src="@drawable/ic_profile"
+                            android:tint="@color/white" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -268,7 +311,7 @@
                             android:layout_marginLeft="@dimen/dp10"
                             android:paddingLeft="@dimen/dp10"
                             android:text="@{bookDetails.autherName}"
-                            android:textColor="@color/black"
+                            android:textColor="@color/white"
                             android:textSize="@dimen/t14sp"
                             app:fontFamily="@font/roboto_regular" />
                     </LinearLayout>
@@ -278,6 +321,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp2"
                         android:text="@{bookInfo.book_desc}"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/t14sp"
                         app:fontFamily="@font/roboto_regular" />
 
@@ -292,7 +336,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp10"
                         android:text="@string/review"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="@dimen/t14sp"
                         app:fontFamily="@font/roboto_regular" />
 
@@ -316,7 +360,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/gray" />
+                    android:background="@color/white" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -356,7 +400,8 @@
                             android:maxLines="4"
                             android:minLines="1"
                             android:scrollbars="vertical"
-                            android:textColor="@android:color/black" />
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/material_gray_100" />
 
 
                     </LinearLayout>

@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dp10"
                 android:text="@string/verify_your_account"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="27sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/roboto_regular" />
@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp10"
-                android:background="@drawable/rounded_corner_white"
+                android:background="@drawable/rounded_corner"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="@dimen/dp10">
@@ -47,7 +47,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp20"
                         android:layout_height="@dimen/dp20"
-                        android:src="@drawable/ic_phone" />
+                        android:src="@drawable/ic_phone"
+                        android:tint="@color/white"/>
                 </LinearLayout>
 
 
@@ -59,7 +60,8 @@
                     android:inputType="number"
                     android:maxLength="10"
                     android:hint="@string/login_with_number"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:background="@null"
                     android:textSize="@dimen/t16sp"
                     app:fontFamily="@font/roboto_regular" />
@@ -91,10 +93,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp10"
                 android:background="@drawable/rounded_corner_unselected"
-                android:paddingTop="@dimen/dp10"
-                android:paddingBottom="@dimen/dp10"
-                android:paddingLeft="@dimen/dp20"
-                android:paddingRight="@dimen/dp20"
+                android:paddingLeft="@dimen/dp15"
+                android:paddingTop="@dimen/dp8"
+                android:paddingRight="@dimen/dp15"
+                android:paddingBottom="@dimen/dp8"
                 >
 
                 <TextView
@@ -102,6 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Get OTP"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/t16sp"
                     app:fontFamily="@font/roboto_regular"/>
 
@@ -113,14 +116,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:layout_margin="@dimen/dp15"
-                android:background="#c0c0c0" />
+                android:background="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/dp20"
                 android:text="@string/not_registered_yet_register_to_listen_books_with_greate_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 app:fontFamily="@font/roboto_regular" />
         </LinearLayout>
     </LinearLayout>

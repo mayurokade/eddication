@@ -60,6 +60,7 @@ public class FragmentBookInfo extends Fragment {
 
 
     private void init() {
+        ((MainActivity) getActivity()).relSearch.setVisibility(View.INVISIBLE);
         data = (DashboardResModel.BookData) getArguments().getSerializable("data");
         apiService = ApiClient.getClient().create(ApiInterface.class);
         binding.rvReview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -84,7 +85,10 @@ public class FragmentBookInfo extends Fragment {
             }
         });
         binding.ivBucket.setOnClickListener(v -> {
-            callAddBookInBuket();
+            if (bookInfoModel.getBookInfo().getBookInfoData().getHasBookInCart())
+                deleteCall();
+            else
+                callAddBookInBuket();
         });
     }
 
@@ -102,6 +106,8 @@ public class FragmentBookInfo extends Fragment {
                     if (response.code() == Constant.FLAG_SUCCESS) {
                         if (response.body().getStatus() == true) {
                             IOUtils.showSnackBar(getActivity(), response.body().getMsg());
+                            bookInfoModel.getBookInfo().getBookInfoData().setHasBookInCart(true);
+                            binding.ivBucket.setImageResource(R.drawable.like_active);
                         } else {
                             if (response.body().getMsg().contains("Invalid")) {
                                 IOUtils.logout(getActivity());
@@ -110,6 +116,46 @@ public class FragmentBookInfo extends Fragment {
                             }
                         }
                     }
+                }
+
+                @Override
+                public void onFailure(Call<StatusModel> call, Throwable t) {
+                    IOUtils.stopLoadingView();
+                    IOUtils.showAlertDialog(getActivity(), getString(R.string.error_message), getString(R.string.something_went));// show alert dialog if invalid credential
+                }
+            });
+
+        } else
+            IOUtils.showSnackBar(getActivity(), getString(R.string.err_internet));
+    }
+
+    private void deleteCall() {
+        if (IOUtils.isConnected(getActivity())) {
+            IOUtils.hideKeyBoard(getActivity());
+            //show progress dialog
+            IOUtils.startLoadingView(getActivity());
+
+            Call<StatusModel> call = apiService.getDeleteBookFromBucketList(BookApp.cache.readString(getActivity(), Constant.USERID, ""),
+                    BookApp.cache.readString(getActivity(), Constant.TOKEN, ""), "1", bookInfoModel.getBookInfo().getBookInfoData().getBookId(), "23");
+            call.enqueue(new Callback<StatusModel>() {
+                @Override
+                public void onResponse(Call<StatusModel> call, Response<StatusModel> response) {
+                    IOUtils.stopLoading();
+                    if (response.code() == Constant.FLAG_SUCCESS) {
+                        if (response.body().getStatus() == true) {
+                            IOUtils.showSnackBar(getActivity(), response.body().getMsg());
+                            bookInfoModel.getBookInfo().getBookInfoData().setHasBookInCart(false);
+                            binding.ivBucket.setImageResource(R.drawable.like_deactive);
+
+                        } else {
+                            if (response.body().getMsg().contains("Invalid")) {
+                                IOUtils.logout(getActivity());
+                            } else {
+                                IOUtils.showAlertDialog(getActivity(), getString(R.string.error_message), response.body().getMsg());// show alert dialog if invalid credential
+                            }
+                        }
+                    }
+
                 }
 
                 @Override
@@ -224,6 +270,10 @@ public class FragmentBookInfo extends Fragment {
             IOUtils.hideKeyBoard(getActivity());
             //show progress dialog
             IOUtils.startLoadingView(getActivity());
+            /*Call<BookInfoModel> call = apiService.getBookInfo(BookApp.cache.readString(getActivity(), Constant.USERID, ""),
+                    BookApp.cache.readString(getActivity(), Constant.TOKEN, ""), "1", data.getBookId());
+            */
+
             Call<BookInfoModel> call = apiService.getBookInfo(BookApp.cache.readString(getActivity(), Constant.USERID, ""),
                     BookApp.cache.readString(getActivity(), Constant.TOKEN, ""), "1", data.getBookId());
             call.enqueue(new Callback<BookInfoModel>() {
@@ -235,13 +285,19 @@ public class FragmentBookInfo extends Fragment {
                             binding.setBookInfo(response.body().getBookInfo().getBookInfoData());
                             bookInfoModel = response.body();
                             binding.tvBookName.setText("" + bookInfoModel.getBookInfo().getBookInfoData().getBookName());
-                            binding.tvAutherName.setText("By : " + bookInfoModel.getBookInfo().getBookInfoData().getBookCatName());
+                            binding.tvAutherName.setText("By : " + bookInfoModel.getBookInfo().getBookInfoData().getBookAutherName());
                             binding.tvCategory.setText("Category : " + bookInfoModel.getBookInfo().getBookInfoData().getBookCatName());
                             binding.ratingBar.setCount(Integer.parseInt(bookInfoModel.getBookInfo().getBookInfoData().getAvgRating()));
                             binding.seekBar.setMax(100);
                             binding.tvPrise.setText("Rs. " + bookInfoModel.getBookInfo().getBookInfoData().getBookPrice());
-
-
+                            binding.tvOurPrice.setText("Rs. " + bookInfoModel.getBookInfo().getBookInfoData().getBookPrice() + "/-");
+                            if (bookInfoModel.getBookInfo().getBookInfoData().getHasBookInCart()) {
+                                binding.ivBucket.setImageResource(R.drawable.like_active);
+                            } else {
+                                binding.ivBucket.setImageResource(R.drawable.like_deactive);
+                            }
+                            IOUtils.loadImage(getActivity(), binding.ivBanner, bookInfoModel.getBookInfo().getBookImagePath() + "/" + bookInfoModel.getBookInfo().getBookInfoData().getBookBannerImage(),R.drawable.default_thumb_book_detail);
+                            binding.ivBanner.setAlpha(0.4f);
                         }
                         if (response.body().getMsg() != null) {
                             if (response.body().getMsg().contains("Invalid")) {

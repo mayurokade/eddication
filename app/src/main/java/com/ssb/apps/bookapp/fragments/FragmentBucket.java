@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ssb.apps.bookapp.R;
+import com.ssb.apps.bookapp.activities.MainActivity;
 import com.ssb.apps.bookapp.adapter.BucketAdapter;
 import com.ssb.apps.bookapp.api.ApiClient;
 import com.ssb.apps.bookapp.api.ApiInterface;
@@ -58,6 +59,7 @@ public class FragmentBucket extends Fragment {
     }
 
     private void init() {
+        ((MainActivity) getActivity()).relSearch.setVisibility(View.INVISIBLE);
         apiService = ApiClient.getClient().create(ApiInterface.class);
         binding.rvBucket.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         callBucketList();

@@ -44,23 +44,15 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
 
 import com.ssb.apps.bookapp.R;
 import com.ssb.apps.bookapp.activities.ActivityLogin2;
-import com.ssb.apps.bookapp.activities.MainActivity;
 import com.ssb.apps.bookapp.apps.BookApp;
-import com.ssb.apps.bookapp.model.RoutModel;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -525,11 +517,11 @@ public class IOUtils {
         for (Object data : listDataHeader) expListView.expandGroup(listDataHeader.indexOf(data));
     }
 
-    public static void loadImage(Context context,ImageView view, String url) {
+    public static void loadImage(Context context, ImageView view, String url, int default_thumb_book_detail) {
 
         Glide.with(context)
                 .load(BookApp.cache.readString(context, Constant.URL,"")+"/"+url)
-                .error(R.drawable.coverpaeg)
+                .error(default_thumb_book_detail)
                 .into(view);
     }
 
@@ -793,9 +785,6 @@ public class IOUtils {
         return context.getString(R.string.str_error);
     }
 
-    public static boolean isEmailAgreeta(String email) {
-        return email.contains("@agreeta.com");
-    }
 
 
 

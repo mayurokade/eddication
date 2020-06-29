@@ -19,66 +19,62 @@
             android:padding="@dimen/dp10"
             tools:context=".fragments.FragmentDashboard">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp50"
-               >
-
-                <AutoCompleteTextView
-                    android:id="@+id/search_box"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableStart="@drawable/ic_search_"
-                    android:dropDownWidth="wrap_content"
-                    android:dropDownVerticalOffset="5dp"
-                    android:inputType="textAutoComplete|textAutoCorrect"
-                    android:popupBackground="@color/white"
-                    android:textColor="#000"/>
-                <TextView
-                    android:id="@+id/tv_all_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="@string/all_categories"
-                    android:textSize="@dimen/t16sp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    app:fontFamily="@font/roboto_regular"
-                    />
-            </RelativeLayout>
-
             <LinearLayout
+                android:id="@+id/linLatest"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp200"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/latest_books"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/t16sp"
-                    android:textStyle="bold"
-                    app:fontFamily="@font/roboto_regular" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/latest_books"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t16sp"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentLeft="true"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/roboto_regular" />
+
+                    <TextView
+                        android:id="@+id/tv_all_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/rounded_corner_selected"
+                       android:padding="@dimen/dp8"
+                        android:text="@string/all_categories"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/t14sp"
+                        app:fontFamily="@font/roboto_regular" />
+                </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_latest_books"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp5"/>
+                    android:layout_marginTop="@dimen/dp10" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linListern"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp200"
-                android:layout_marginTop="@dimen/dp10"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp15"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/listenrs_choice"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/t16sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/roboto_regular" />
@@ -86,21 +82,23 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_listeners_choice"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/dp5"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp5" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linMiddle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp200"
-                android:layout_marginTop="@dimen/dp10"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp15"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/you_are_in_middle_of_something"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/t16sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/roboto_regular" />
@@ -112,16 +110,18 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linMore"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp200"
-                android:layout_marginTop="@dimen/dp10"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp15"
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/more_rated_books"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/t16sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/roboto_regular" />
@@ -129,8 +129,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_more_books"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/dp5"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp5" />
             </LinearLayout>
 
         </LinearLayout>

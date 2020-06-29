@@ -5,16 +5,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.ssb.apps.bookapp.R;
-import com.ssb.apps.bookapp.utils.FontOverride;
 import com.ssb.apps.bookapp.utils.PreferenceConnector;
 
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-
-/**
- * Created by prateek on 11/05/2018.
- */
 
 public class BookApp extends Application {
     private static BookApp mInstance;
@@ -57,10 +52,7 @@ public class BookApp extends Application {
         Fabric.with(fabric);*/
 
 
-        FontOverride.setDefaultFont(this, "DEFAULT", "fonts/roboto_bold.ttf");
-        FontOverride.setDefaultFont(this, "MONOSPACE", "fonts/gothicb.ttf");
-        FontOverride.setDefaultFont(this, "SERIF", "fonts/century_gothic.ttf");
-        FontOverride.setDefaultFont(this, "SANS_SERIF", "fonts/century_gothic.ttf");
+
 
 
 
